@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Flying Dutchman</title>
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:200' rel='stylesheet' type='text/css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+  <link rel="stylesheet" href="css/style.css" />
+
+</head>
+
+<body>
+  <!-- Notifications -->
+  <el-toast> </el-toast>
+
+  <template id="elToastItem">
+    <div class="el-toast__icon"></div>
+    <div class="el-toast__close">
+      <button>
+        <i class="fa fa-fw fa-times"></i>
+      </button>
+    </div>
+    <div class="el-toast__description"></div>
+    <div class="el-toast__action"></div>
+    <div class="el-toast__progress">
+      <div class="el-toast__bar" style="width: 100%;"></div>
+    </div>
+  </template>
+
+  <template id="elToast">
+    <ul class="el-toast"></ul>
+  </template>
+
+  <div class="toolbar">
+    <nav class="windows-menubar">
+      <div class="menubar-item">
+        <div class="menubar-item-label">Window</div>
+        <div class="menubar-sub-items">
+          <div onclick="maxie(0)" class="menubar-item"><span class="menubar-item-label">Program editor</span>
+          </div>
+          <div onclick="maxie(1)" class="menubar-item"><span class="menubar-item-label">Compiler</span>
+          </div>
+          <div onclick="maxie(2)" class="menubar-item"><span class="menubar-item-label">Inspector</span>
+          </div>
+          <div onclick="maxie(3)" class="menubar-item"><span class="menubar-item-label">Assets</span>
+          </div>
+          <div onclick="maxie(4)" class="menubar-item"><span class="menubar-item-label">Reset layout...</span>
+          </div>
+          <div class="menubar-item"><span class="menubar-item-label">Quit</span>
+          </div>
+        </div>
+      </div>
+      <div class="menubar-item">
+        <div class="menubar-item-label">Connection</div>
+        <div class="menubar-sub-items">
+          <div id="conLabel" onclick="connect()" class="menubar-item"><span class="menubar-item-label">Connect</span>
+            <div class="menubar-sub-items">
+            </div>
+          </div>
+          <div id="nocLabel" onclick="conToggle(0)" class="menubar-item nohover"><span
+              class="menubar-item-label">Disconnect</span>
+            <div class="menubar-sub-items">
+            </div>
+          </div>
+          <div class="menubar-item"><span class="menubar-item-label">Options <span class="combo">></span></span>
+            <div class="menubar-sub-items">
+              <div class="menubar-item"><span class="menubar-item-label">URL Configuration </span>
+                <div class="menubar-sub-items">
+                  <div onclick="promptBox(0)" class="menubar-item"><span class="menubar-item-label">Read URL</span>
+                  </div>
+                  <div onclick="promptBox(1)" class="menubar-item"><span class="menubar-item-label">Write URL</span>
+                  </div>
+                </div>
+              </div>
+              <div onclick="promptBox(2)" class="menubar-item"><span class="menubar-item-label">Launch Codes</span>
+                <div class="menubar-sub-items">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menubar-item">
+        <div class="menubar-item-label">Theme</div>
+        <div class="menubar-sub-items">
+          <div class="menubar-item nohover"><span class="menubar-item-label">Lightside</span>
+            <div class="menubar-sub-items">
+            </div>
+          </div>
+          <div class="menubar-item"><span class="menubar-item-label">Darkside<span class="combo">[Coming
+                soon]</span></span>
+            <div class="menubar-sub-items">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menubar-item">
+        <div class="menubar-item-label">Help</div>
+        <div class="menubar-sub-items">
+        </div>
+      </div>
+    </nav>
+
+    <div class="tlock">Ver 4.1</div>
+    <div class="tstat"><span id="cDot" class="idot redDot"></span><span id="conStat">Disconnected</span></div>
+
+  </div>
+
+  <div class="pretty-split-pane-frame">
+    <div class="split-pane fixed-left" id="split-pane-1">
+
+      <div class="split-pane-component" id="left-component">
+        <div class="split-pane fixed-bottom" id="split-pane-2">
+
+          <div class="split-pane-component" id="top-component-1">
+            <div style="border-bottom:1px solid #fff" ondblclick="winman(1)" class="title-section">
+              <p>Compiler</p>
+              <span onclick="winman(1)" class="min"></span>
+            </div>
+            <div class="pretty-split-pane-component-inner shell">
+              <div id="vim" tabIndex="0" onfocus="winFocus(0)" onblur="winBlur(0)" class="terminal">
+              </div>
+            </div>
+          </div>
+
+          <div class="split-pane-divider" id="horizontal-divider-1"></div>
+
+          <div class="split-pane-component" id="bottom-component-1">
+            <div ondblclick="winman(2)" class="title-section">
+              <p>▼ &nbsp;Inspector</p><span onclick="winman(2)" class="min"></span>
+            </div>
+            <div tabIndex="1" style="height:100%" onfocus="winFocus(1)" onblur="winBlur(1)">
+              <div class="toolbar inbar">
+                <nav id="inspector-toolbar" class="windows-menubar nohover">
+                  <div class="menubar-item">
+                    <div class="menubar-item-label">Mode</div>
+                    <div class="menubar-sub-items">
+                      <div onclick="modeSelector(false)" id="manMode" class="menubar-item"><span
+                          class="menubar-item-label">Manual</span>
+                      </div>
+                      <div onclick="modeSelector(true)" id="autoMode" class="menubar-item nohover"><span
+                          class="menubar-item-label">Automatic</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="menubar-item">
+                    <div class="menubar-item-label">View</div>
+                    <div class="menubar-sub-items">
+                      <div class="menubar-item"><span class="menubar-item-label">Root file</span>
+                      </div>
+                      <div class="menubar-item"><span class="menubar-item-label">Logs</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="menubar-item">
+                    <div class="menubar-item-label">Load</div>
+                    <div class="menubar-sub-items">
+                      <div id="relod"
+                        onclick="document.getElementById('spinner').style.display = 'block';document.getElementById('statusbar').textContent = 'Updating..';document.getElementById('holmes').innerHTML='';initReq();"
+                        class="menubar-item nohover"><span class="menubar-item-label">Reload</span>
+                      </div>
+                      <div id="setRelod" onclick="promptBox(3)" class="menubar-item"><span
+                          class="menubar-item-label">Options</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="menubar-item">
+                    <div class="menubar-item-label">Format</div>
+                    <div class="menubar-sub-items">
+                      <div id="fmt" onclick="formatData(true)" class="menubar-item nohover"><span
+                          class="menubar-item-label">Formatted
+                          data</span>
+                      </div>
+                      <div id="ufmt" onclick="formatData(false)" class="menubar-item"><span
+                          class="menubar-item-label">Unformatted
+                          data</span>
+                      </div>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              <div id="holmes" class="pretty-split-pane-component-inner xcel">
+                <div id='rudy'>⚠ Not connected to Network</div>
+              </div>
+              <div id="statusbar"></div>
+              <div id="spinner"></div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!--verical divider-->
+      <div class="split-pane-divider" id="vertical-divider"></div>
+      <!--verical divider-->
+
+      <div class="split-pane-component" id="right-component">
+        <div id="etar" ondblclick="winman(0)" class="title-section">
+          <p><span id="fne">Untitled.fdm</span> &nbsp;&nbsp;- Notepad</p><span onclick="winman(0)" class="min"></span>
+        </div>
+        <div id="ebar" class="toolbar inbar">
+          <nav class="windows-menubar">
+            <div class="menubar-item">
+              <div class="menubar-item-label">File</div>
+              <div class="menubar-sub-items">
+                <div class="menubar-item"><span class="menubar-item-label">New</span>
+                </div>
+                <div class="menubar-item"><span class="menubar-item-label">Open...</span>
+                </div>
+                <div class="menubar-item"><span class="menubar-item-label">Download</span>
+                </div>
+                <div class="menubar-item"><span class="menubar-item-label">Print</span>
+                </div>
+              </div>
+            </div>
+            <div class="menubar-item">
+              <div class="menubar-item-label">Edit</div>
+              <div class="menubar-sub-items">
+                <div onclick="document.execCommand('undo', true, null);" class="menubar-item"><span
+                    class="menubar-item-label">Undo<span class="combo">CTRL + Z</span></span>
+                </div>
+                <div onclick="document.execCommand('redo', true, null);" class="menubar-item"><span
+                    class="menubar-item-label">Redo<span class="combo">CTRL + Y</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menubar-item">
+              <div class="menubar-item-label">Wiki</div>
+              <div class="menubar-sub-items">
+                <div onclick="lawyer(0)" class="menubar-item"><span class="menubar-item-label">Documentation</span>
+                  <div class="menubar-sub-items">
+                  </div>
+                </div>
+                <div class="menubar-item"><span class="menubar-item-label">Example programs</span>
+                  <div class="menubar-sub-items">
+                    <div class="menubar-item"><span class="menubar-item-label">Emergency Deletion</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(1)" class="menubar-item"><span class="menubar-item-label">All
+                            Devices</span>
+                        </div>
+                        <div onclick="enigma(2)" class="menubar-item"><span class="menubar-item-label">Target
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Device status</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(3)" class="menubar-item"><span class="menubar-item-label">All
+                            Devices</span>
+                        </div>
+                        <div onclick="enigma(4)" class="menubar-item"><span class="menubar-item-label">Target
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Terminate execution</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(5)" class="menubar-item"><span class="menubar-item-label">All
+                            Devices</span>
+                        </div>
+                        <div onclick="enigma(6)" class="menubar-item"><span class="menubar-item-label">Target
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="menubar-item"><span class="menubar-item-label">Update firmware</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(7)" class="menubar-item"><span class="menubar-item-label">All
+                            Devices</span>
+                        </div>
+                        <div onclick="enigma(8)" class="menubar-item"><span class="menubar-item-label">Target
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Hibernation</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(21)" class="menubar-item"><span class="menubar-item-label">All
+                            Devices</span>
+                        </div>
+                        <div onclick="enigma(22)" class="menubar-item"><span class="menubar-item-label">Target
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Replication</span>
+                      <div class="menubar-sub-items">
+                        <div class="menubar-item"><span class="menubar-item-label">Clone to connected USB</span>
+                        </div>
+                        <div class="menubar-item"><span class="menubar-item-label">Stop cloning</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Remote code execution</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(9)" class="menubar-item"><span class="menubar-item-label">VB
+                            Script</span>
+                        </div>
+                        <div onclick="enigma(10)" class="menubar-item"><span class="menubar-item-label">Batch
+                            Script</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Remote sound execution</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(11)" class="menubar-item"><span class="menubar-item-label">Text to
+                            speech</span>
+                        </div>
+                        <div onclick="enigma(12)" class="menubar-item"><span class="menubar-item-label">mp3
+                            file</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Show dialog box</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(13)" class="menubar-item"><span class="menubar-item-label">Timed
+                            Auto-close</span>
+                        </div>
+                        <div onclick="enigma(14)" class="menubar-item"><span class="menubar-item-label">Normal</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Open Chat-sessions</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(15)" class="menubar-item"><span class="menubar-item-label">Live Incognito
+                            session</span>
+                        </div>
+                        <div onclick="enigma(16)" class="menubar-item"><span class="menubar-item-label">Scripted
+                            session</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Browser operations</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(17)" class="menubar-item"><span class="menubar-item-label">Run query in
+                            New
+                            Tab</span>
+                        </div>
+                        <div onclick="enigma(18)" class="menubar-item"><span class="menubar-item-label">Start Typing
+                            in
+                            search bar</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Device operations</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(19)" class="menubar-item"><span class="menubar-item-label">Rename
+                            RAT</span>
+                        </div>
+                        <div onclick="enigma(20)" class="menubar-item"><span class="menubar-item-label">Locate a
+                            device</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">File operations</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(23)" class="menubar-item"><span class="menubar-item-label">Health
+                            Report</span>
+                        </div>
+                        <div onclick="enigma(24)" class="menubar-item"><span class="menubar-item-label">Disk
+                            summary</span>
+                        </div>
+                        <div onclick="enigma(25)" class="menubar-item"><span class="menubar-item-label">Drive
+                            Tree</span>
+                        </div>
+                        <div onclick="enigma(26)" class="menubar-item"><span class="menubar-item-label">Fetch file
+                            from
+                            target</span>
+                        </div>
+                        <div onclick="enigma(27)" class="menubar-item"><span class="menubar-item-label">Download file
+                            onto target</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menubar-item"><span class="menubar-item-label">Capture methods</span>
+                      <div class="menubar-sub-items">
+                        <div onclick="enigma(28)" class="menubar-item"><span class="menubar-item-label">Audio
+                            capture</span>
+                        </div>
+                        <div onclick="enigma(29)" class="menubar-item"><span class="menubar-item-label">Process
+                            capture</span>
+                        </div>
+                        <div onclick="enigma(30)" class="menubar-item"><span class="menubar-item-label">Webcam
+                            capture</span>
+                        </div>
+                        <div onclick="enigma(31)" class="menubar-item"><span
+                            class="menubar-item-label">Screenshot</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div onclick="enigma(32)" class="menubar-item"><span class="menubar-item-label">Execute and
+                        Escape</span>
+                      <div class="menubar-sub-items">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div onclick="lawyer(1)" class="menubar-item"><span class="menubar-item-label">License</span>
+                  <div class="menubar-sub-items">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="adb" class="menubar-item">
+              <div class="menubar-item-label">Run</div>
+              <div id="fastboot" class="menubar-sub-items">
+
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="split-pane fixed-bottom" id="split-pane-2">
+
+          <div class="split-pane-component" id="top-component-2">
+
+            <div class="pretty-split-pane-component-inner logo">
+              <div tabIndex="2" id="editor">
+              </div>
+            </div>
+          </div>
+
+          <div class="split-pane-divider" id="horizontal-divider-2"></div>
+
+          <div class="split-pane-component" id="bottom-component-2">
+            <div ondblclick="winman(3)" class="title-section">
+              <p>Assets</p><span onclick="winman(3)" class="min"></span>
+            </div>
+            <div tabIndex="3" onfocus="winFocus(3)" onblur="winBlur(3)" class="pretty-split-pane-component-inner">
+
+              <div class="section-content">
+                <audio id="reel" src="" onloadeddata="audioLoaded()" onended="donePlaying()" preload="auto"></audio>
+                <table style="width:100%">
+                  <tr class="table-head">
+                    <td>SI No</td>
+                    <td>Title</td>
+                    <td>Size</td>
+                    <td>Duration</td>
+                    <td>Action</td>
+                    <td>Link</td>
+                  </tr>
+
+                  <tr>
+                    <td>1</td>
+                    <td>Mechanicus - I have Awoken</td>
+                    <td>52kb</td>
+                    <td>00.11</td>
+                    <td><mark class="audi" onclick='stereo(this,"mechanicus_awoken")'>Play</mark></td>
+                    <td><mark onclick='istereo("mechanicus_awoken")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                    <td>Mechanicus - The Weakness of Flesh</td>
+                    <td>52kb</td>
+                    <td>01.12</td>
+                    <td><mark class="audi" onclick='stereo(this,"mechanicus_flesh")'>Play</mark></td>
+                    <td><mark onclick='istereo("mechanicus_flesh")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>John cena - Name</td>
+                    <td>52kb</td>
+                    <td>00.13</td>
+                    <td><mark class="audi" onclick='stereo(this,"cena")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>John cena - Are you ready</td>
+                    <td>52kb</td>
+                    <td>00.05</td>
+                    <td><mark class="audi" onclick='stereo(this,"cena-qn")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>5</td>
+                    <td>John cena - I'm watchin u</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"cena-watch")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>John cena - Good bye</td>
+                    <td>52kb</td>
+                    <td>00.16</td>
+                    <td><mark class="audi" onclick='stereo(this,"cena-bye")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>7</td>
+                    <td>Liam neeson - Good luck</td>
+                    <td>52kb</td>
+                    <td>00.09</td>
+                    <td><mark class="audi" onclick='stereo(this,"gudluck")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>Liam neeson - Find you!</td>
+                    <td>52kb</td>
+                    <td>00.13</td>
+                    <td><mark class="audi" onclick='stereo(this,"findu")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>9</td>
+                    <td>Liam neeson - Skills</td>
+                    <td>52kb</td>
+                    <td>00.15</td>
+                    <td><mark class="audi" onclick='stereo(this,"skills")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>10</td>
+                    <td>Heath ledger - Magic trick</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"heath-magic")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>11</td>
+                    <td>Heath ledger - Plan</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"heath-plan")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>12</td>
+                    <td>Heath ledger - Smile</td>
+                    <td>52kb</td>
+                    <td>00.04</td>
+                    <td><mark class="audi" onclick='stereo(this,"heath-smile")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>13</td>
+                    <td>Heath ledger - Fight in you</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"heath-fight")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>14</td>
+                    <td>Christian bale - If i were u</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"bale-ifiwereyou")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>15</td>
+                    <td>Tom hardy - In charge</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"tomhardy-incharge")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>16</td>
+                    <td>Tom hardy - plan</td>
+                    <td>52kb</td>
+                    <td>00.05</td>
+                    <td><mark class="audi" onclick='stereo(this,"tomhardy-plan")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>17</td>
+                    <td>Tony stark - Awful</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"stark-awful")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>18</td>
+                    <td>Tony stark - Hardware mode</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"stark-hardware")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>20</td>
+                    <td>Michael caine - Wizard</td>
+                    <td>52kb</td>
+                    <td>00.09</td>
+                    <td><mark class="audi" onclick='stereo(this,"wizard")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>21</td>
+                    <td>John connor - Resistance</td>
+                    <td>52kb</td>
+                    <td>00.06</td>
+                    <td><mark class="audi" onclick='stereo(this,"resistance")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>22</td>
+                    <td>Johnny depp - No.. Not good</td>
+                    <td>52kb</td>
+                    <td>00.05</td>
+                    <td><mark class="audi" onclick='stereo(this,"notgud")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>23</td>
+                    <td>Join Us</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"cena-join")'>Play</mark></td>
+                    <td><mark onclick='istereo("cena")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>24</td>
+                    <td>hi how are ya</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"hihowru")'>Play</mark></td>
+                    <td><mark onclick='istereo("hihowru")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>25</td>
+                    <td>Damnnnn, son</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"damnson")'>Play</mark></td>
+                    <td><mark onclick='istereo("damnson")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>26</td>
+                    <td>catch me oustide bro</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"catchmeoutside")'>Play</mark></td>
+                    <td><mark onclick='istereo("catchmeoutside")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>27</td>
+                    <td>Ahh come on man</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"comeon")'>Play</mark></td>
+                    <td><mark onclick='istereo("comeon")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>28</td>
+                    <td>Its just a prank bro</td>
+                    <td>52kb</td>
+                    <td>00.06</td>
+                    <td><mark class="audi" onclick='stereo(this,"prank")'>Play</mark></td>
+                    <td><mark onclick='istereo("prank")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>29</td>
+                    <td>Its just a game bro</td>
+                    <td>52kb</td>
+                    <td>00.06</td>
+                    <td><mark class="audi" onclick='stereo(this,"ymad")'>Play</mark></td>
+                    <td><mark onclick='istereo("ymad")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>30</td>
+                    <td>heavenly long</td>
+                    <td>52kb</td>
+                    <td>00.19</td>
+                    <td><mark class="audi" onclick='stereo(this,"heaven")'>Play</mark></td>
+                    <td><mark onclick='istereo("heaven")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>31</td>
+                    <td>heavenly short</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"heavenshort")'>Play</mark></td>
+                    <td><mark onclick='istereo("heavenshort")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>32</td>
+                    <td>hello Adele</td>
+                    <td>52kb</td>
+                    <td>00.06</td>
+                    <td><mark class="audi" onclick='stereo(this,"hello")'>Play</mark></td>
+                    <td><mark onclick='istereo("hello")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>33</td>
+                    <td>hello aliens</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"helloalien")'>Play</mark></td>
+                    <td><mark onclick='istereo("helloalien")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>34</td>
+                    <td>hello darkness my old frnd</td>
+                    <td>52kb</td>
+                    <td>00.18</td>
+                    <td><mark class="audi" onclick='stereo(this,"darkness")'>Play</mark></td>
+                    <td><mark onclick='istereo("darkness")'>Insert</mark></td>
+                  </tr>
+                  <tr>
+                    <td>35</td>
+                    <td>pssst...</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"psst")'>Play</mark></td>
+                    <td><mark onclick='istereo("psst")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>36</td>
+                    <td>Tada</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"tada")'>Play</mark></td>
+                    <td><mark onclick='istereo("tada")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>37</td>
+                    <td>Tadaaah</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"tadaaah")'>Play</mark></td>
+                    <td><mark onclick='istereo("tadaaah")'>Insert</mark></td>
+                  </tr>
+
+
+                  <tr>
+                    <td>38</td>
+                    <td>he fuck'd up</td>
+                    <td>52kb</td>
+                    <td>00.05</td>
+                    <td><mark class="audi" onclick='stereo(this,"fckdup")'>Play</mark></td>
+                    <td><mark onclick='istereo("fckdup")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>39</td>
+                    <td>aliens space</td>
+                    <td>52kb</td>
+                    <td>00.16</td>
+                    <td><mark class="audi" onclick='stereo(this,"alienspace")'>Play</mark></td>
+                    <td><mark onclick='istereo("alienspace")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>40</td>
+                    <td>aliens: stupid-human</td>
+                    <td>52kb</td>
+                    <td>00.03</td>
+                    <td><mark class="audi" onclick='stereo(this,"alienboss")'>Play</mark></td>
+                    <td><mark onclick='istereo("alienboss")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>41</td>
+                    <td>I'll be back</td>
+                    <td>52kb</td>
+                    <td>00.04</td>
+                    <td><mark class="audi" onclick='stereo(this,"back")'>Play</mark></td>
+                    <td><mark onclick='istereo("back")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>42</td>
+                    <td>incoming signal</td>
+                    <td>52kb</td>
+                    <td>00.05</td>
+                    <td><mark class="audi" onclick='stereo(this,"incoming")'>Play</mark></td>
+                    <td><mark onclick='istereo("incoming")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>43</td>
+                    <td>Hacking Your Computer...</td>
+                    <td>52kb</td>
+                    <td>00.53</td>
+                    <td><mark class="audi" onclick='stereo(this,"instal")'>Play</mark></td>
+                    <td><mark onclick='istereo("instal")'>Insert</mark></td>
+                  </tr>
+
+
+
+                  <tr>
+                    <td>44</td>
+                    <td>Lets do this!</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"letsdothis")'>Play</mark></td>
+                    <td><mark onclick='istereo("letsdothis")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>45</td>
+                    <td>Mission failed</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"missionfailed")'>Play</mark></td>
+                    <td><mark onclick='istereo("missionfailed")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>46</td>
+                    <td>L and R Audio whistle</td>
+                    <td>52kb</td>
+                    <td>00.06</td>
+                    <td><mark class="audi" onclick='stereo(this,"whistle")'>Play</mark></td>
+                    <td><mark onclick='istereo("whistle")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>47</td>
+                    <td>Salim kumar -dance master vikram</td>
+                    <td>52kb</td>
+                    <td>00.31</td>
+                    <td><mark class="audi" onclick='stereo(this,"vikram")'>Play</mark></td>
+                    <td><mark onclick='istereo("vikram")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>48</td>
+                    <td>Harisree Asokan -Palm reader</td>
+                    <td>52kb</td>
+                    <td>00.35</td>
+                    <td><mark class="audi" onclick='stereo(this,"palm")'>Play</mark></td>
+                    <td><mark onclick='istereo("palm")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>49</td>
+                    <td>Salim kumar -pandy lorry story</td>
+                    <td>52kb</td>
+                    <td>00.50</td>
+                    <td><mark class="audi" onclick='stereo(this,"pandilorry")'>Play</mark></td>
+                    <td><mark onclick='istereo("pandilorry")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>50</td>
+                    <td>Jagathi -kadal kadala</td>
+                    <td>52kb</td>
+                    <td>00.47</td>
+                    <td><mark class="audi" onclick='stereo(this,"kadala")'>Play</mark></td>
+                    <td><mark onclick='istereo("kadala")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>51</td>
+                    <td>Mukesh -But Why.</td>
+                    <td>52kb</td>
+                    <td>00.16</td>
+                    <td><mark class="audi" onclick='stereo(this,"but-why")'>Play</mark></td>
+                    <td><mark onclick='istereo("but-why")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>52</td>
+                    <td>hello female</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"femalehello")'>Play</mark></td>
+                    <td><mark onclick='istereo("femalehello")'>Insert</mark></td>
+                  </tr>
+
+                  <tr>
+                    <td>53</td>
+                    <td>Guess who</td>
+                    <td>52kb</td>
+                    <td>00.01</td>
+                    <td><mark class="audi" onclick='stereo(this,"guesswho")'>Play</mark></td>
+                    <td><mark onclick='istereo("guesswho")'>Insert</mark></td>
+                  </tr>
+                  <tr>
+                    <td>54</td>
+                    <td>Oombi Ombi</td>
+                    <td>52kb</td>
+                    <td>00.02</td>
+                    <td><mark class="audi" onclick='stereo(this,"oombi")'>Play</mark></td>
+                    <td><mark onclick='istereo("oombi")'>Insert</mark></td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <script src='js/libs/jquery.min.js'></script>
+  <script src="js/layout.js"></script>
+
+  <script src="js/libs/ace.min.js"></script>
+  <script src="js/libs/ext-language_tools.min.js"></script>
+  <script src="js/libs/mode-javascript.min.js"></script>
+  <script src="js/libs/theme-clouds.min.js"></script>
+
+  <script src="js/toast.js"></script>
+  <script src="js/testing.js"></script> <!-- Not to be included in Production Build-->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
