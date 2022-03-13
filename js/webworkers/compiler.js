@@ -51,6 +51,198 @@ onmessage = function (event) {
  var arr = [false, "txt", "html", "target", false]; //Err checking, Err Description & Target
 
  var PC = {
+  Excape: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Excape(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Execute Batch script and Escape()";
+    }
+   }
+  },
+
+  Escape: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Escape(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Destroy Evidence and Escape";
+    }
+   }
+  },
+
+  Marco: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Marco(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Returns Polo if Online";
+    }
+   }
+  },
+
+  Close: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Close(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- End Execution";
+    }
+   }
+  },
+
+  Update: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Update(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Updates self";
+    }
+   }
+  },
+
+  Hibernate: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Hibernate(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Hibernate till date";
+    }
+   }
+  },
+
+  Revive: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Revive(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- End Hibernation  ";
+    }
+   }
+  },
+
+  Notify: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Notify(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Notifies power schedule";
+    }
+   }
+  },
+
+  Rename: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Rename(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Renames RAT";
+    }
+   }
+  },
+
+  Flash: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Flash(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Flashes Screen, Visual Indication";
+    }
+   }
+  },
+
+  Vbs: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Vbs(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Runs .VBS Script";
+    }
+   }
+  },
+
+  Bat: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Bat(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Runs .Bat Script";
+    }
+   }
+  },
+
+  Shell: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Shell(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Runs Shell Commands";
+    }
+   }
+  },
+
+  Speak: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Speak(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Text to Speech";
+    }
+   }
+  },
+
+  Play: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Audio ref Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Play(<grn>*.mp3</grn>)<br><br>Compiler failed with exit code 1F96";
+    } else {
+     txt += "<br>- Plays a Remote Audio file on host PC";
+    }
+   }
+  },
+
+  Mic: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Mic(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Records audio for 'x' ms";
+    }
+   }
+  },
+
   Lock: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
@@ -63,28 +255,55 @@ onmessage = function (event) {
     }
    }
   },
-  Cmd: (x) => {
-   if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Command Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Cmd(<grn>command</grn>)<br><br>Compiler failed with exit code 1F66";
-    } else {
-     txt += "<br>- Runs Win32 Terminal Commands";
-    }
-   }
-  },
-  Delay: (x) => {
+
+  Info: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
      arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Delay(<grn>milliseconds</grn>)<br><br>Compiler failed with exit code 1F84";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Info(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     txt += "<br>- Adds temporarily delay";
+     txt += "<br>- Shows Info box";
     }
    }
   },
+
+  Warn: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Warn(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Shows Warning Box";
+    }
+   }
+  },
+
+  Error: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Error(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Shows Error box";
+    }
+   }
+  },
+
+  Msgbox: (x, y) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Msgbox(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Shows Msg Box fo 'y' ms";
+    }
+   }
+  },
+
   Google: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
@@ -96,14 +315,171 @@ onmessage = function (event) {
     }
    }
   },
-  Play: (x) => {
+
+  Web: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
-     arr[1] = "Audio ref Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Play(<grn>*.mp3</grn>)<br><br>Compiler failed with exit code 1F96";
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Web(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     txt += "<br>- Plays a Remote Audio file on host PC";
+     txt += "<br>- Navigates to 'x' url";
+    }
+   }
+  },
+
+  Type: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Type(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Types custom text";
+    }
+   }
+  },
+
+  Screenshot: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Screenshot(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Takes a Screenshot";
+    }
+   }
+  },
+
+  Camera: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Camera(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Captures a Photo";
+    }
+   }
+  },
+
+  Disk: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Disk(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Retrieves Disk Info";
+    }
+   }
+  },
+
+  Tree: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Tree(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Retrieves Disk Info";
+    }
+   }
+  },
+
+  Send: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Send(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Sends a File";
+    }
+   }
+  },
+
+  Zip: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Zip(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Zip a folder";
+    }
+   }
+  },
+
+  Unzip: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Unzip(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Unzips file";
+    }
+   }
+  },
+
+  Health: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Health(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Reports back working conditions";
+    }
+   }
+  },
+
+  Log: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Log(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Logs every Activity";
+    }
+   }
+  },
+
+  Delay: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Delay(<grn>milliseconds</grn>)<br><br>Compiler failed with exit code 1F84";
+    } else {
+     txt += "<br>- Adds temporarily delay";
+    }
+   }
+  },
+
+  Clone: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Clone(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Initiate Clone Operations";
+    }
+   }
+  },
+
+  Noclone: () => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Noclone(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Stops Cloning op";
     }
    }
   },

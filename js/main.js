@@ -256,63 +256,90 @@ webWorker.onmessage = function (event) {
 // [Editor]
 var fileName = "Untitled.fdm";
 var lexWorker = new Worker("./js/webworkers/compiler.js");
-var editor = ace.edit("editor", {wrap: true});
+var editor = ace.edit("editor");
 editor.getSession().setMode("ace/mode/javascript");
 editor.container.style.lineHeight = 1.7;
 editor.setOptions({
  theme: "ace/theme/clouds",
+ wrap: true,
  showPrintMargin: false,
  fontSize: "13px",
  maxLines: Infinity,
- enableBasicAutocompletion: [
-  {
-   getCompletions: (editor, session, pos, prefix, callback) => {
-    callback(null, [
-     {value: "PC.Excape();", meta: "Execute Batch script and Escape()"},
-     {value: "PC.Escape();", meta: "Destroy Evidence and Escape"},
-     {value: "PC.Marco();", meta: "Returns Polo if Online"},
-     {value: "PC.Close();", meta: "End Execution"},
-     {value: "PC.Update();", meta: "Updates self"},
-     {value: "PC.Hibernate();", meta: "Hibernate till date"},
-     {value: "PC.Revive();", meta: "End Hibernation  "},
-     {value: "PC.Notify();", meta: "Notifies power schedule"},
-     {value: "PC.Rename();", meta: "Renames RAT"},
-     {value: "PC.Flash();", meta: "Flashes Screen, Visual Indication"},
-     {value: "PC.Vbs();", meta: "Runs .VBS Script"},
-     {value: "PC.Bat();", meta: "Runs .Bat Script"},
-     {value: "PC.Shell();", meta: "Runs Shell Commands"},
-     {value: "PC.Speak();", meta: "Text to Speech"},
-     {value: "PC.Play();", meta: "Play a Remote (mp3) Audio File (URL)"},
-     {value: "PC.Mic();", meta: "Records audio for 'x' ms"},
-     {value: "PC.Lock();", meta: "Select Target"},
-     {value: "PC.Info();", meta: "Shows Info box"},
-     {value: "PC.Warn();", meta: "Shows Warning Box"},
-     {value: "PC.Error();", meta: "Shows Error box"},
-     {value: "PC.Msgbox(x,y);", meta: "Shows Msg Box fo 'y' ms"},
-     {value: "PC.Google();", meta: "Googles selected Text"},
-     {value: "PC.Web();", meta: "Navigates to 'x' url"},
-     {value: "PC.Type();", meta: "Types custom text"},
-     {value: "PC.Screenshot();", meta: "Takes a Screenshot"},
-     {value: "PC.Camera();", meta: "Captures a Photo"},
-     {value: "PC.Disk();", meta: "Retrieves Disk Info"},
-     {value: "PC.Tree();", meta: "Retrieves Disk Info"},
-     {value: "PC.Send();", meta: "Sends a File"},
-     {value: "PC.Zip();", meta: "Zip a folder"},
-     {value: "PC.Unzip();", meta: "Unzips file"},
-     {value: "PC.Health();", meta: "Reports back working conditions"},
-     {value: "PC.Log();", meta: "Logs every Activity"},
-     {value: "PC.Delay();", meta: "Pause Execution temporarily for 'x' ms"},
-     {value: "PC.Clone();", meta: "Initiate Clone Operations"},
-     {value: "PC.Noclone();", meta: "Stops Cloning op"},
-    ]);
-   },
-  },
- ],
+ enableSnippets: true,
+ enableBasicAutocompletion: true,
  enableLiveAutocompletion: true,
 });
 
+var wordList = [
+ {value: "Excape();", meta: "Execute Batch script and Escape()"},
+ {value: "Escape();", meta: "Destroy Evidence and Escape"},
+ {value: "Marco();", meta: "Returns Polo if Online"},
+ {value: "Close();", meta: "End Execution"},
+ {value: "Update();", meta: "Updates self"},
+ {value: "Hibernate();", meta: "Hibernate till date"},
+ {value: "Revive();", meta: "End Hibernation  "},
+ {value: "Notify();", meta: "Notifies power schedule"},
+ {value: "Rename();", meta: "Renames RAT"},
+ {value: "Flash();", meta: "Flashes Screen, Visual Indication"},
+ {value: "Vbs();", meta: "Runs .VBS Script"},
+ {value: "Bat();", meta: "Runs .Bat Script"},
+ {value: "Shell();", meta: "Runs Shell Commands"},
+ {value: "Speak();", meta: "Text to Speech"},
+ {value: "Play();", meta: "Play a Remote (mp3) Audio File (URL)"},
+ {value: "Mic();", meta: "Records audio for 'x' ms"},
+ {value: "Lock();", meta: "Select Target"},
+ {value: "Info();", meta: "Shows Info box"},
+ {value: "Warn();", meta: "Shows Warning Box"},
+ {value: "Error();", meta: "Shows Error box"},
+ {value: "Msgbox(x,y);", meta: "Shows Msg Box fo 'y' ms"},
+ {value: "Google();", meta: "Googles selected Text"},
+ {value: "Web();", meta: "Navigates to 'x' url"},
+ {value: "Type();", meta: "Types custom text"},
+ {value: "Screenshot();", meta: "Takes a Screenshot"},
+ {value: "Camera();", meta: "Captures a Photo"},
+ {value: "Disk();", meta: "Retrieves Disk Info"},
+ {value: "Tree();", meta: "Retrieves Disk Info"},
+ {value: "Send();", meta: "Sends a File"},
+ {value: "Zip();", meta: "Zip a folder"},
+ {value: "Unzip();", meta: "Unzips file"},
+ {value: "Health();", meta: "Reports back working conditions"},
+ {value: "Log();", meta: "Logs every Activity"},
+ {value: "Delay();", meta: "Pause Execution temporarily for 'x' ms"},
+ {value: "Clone();", meta: "Initiate Clone Operations"},
+ {value: "Noclone();", meta: "Stops Cloning op"},
+];
+var staticWordCompleter = {
+ getCompletions: function (editor, session, pos, prefix, callback) {
+  let line = session.getLine(pos.row);
+  let lineStart = line.slice(0, pos.column - prefix.length);
+  var myList = /PC\.\s*$/i.test(lineStart) ? wordList : [];
+  callback(
+   null,
+   myList.map((item) => {
+    return {
+     value: item.value,
+     meta: item.meta,
+     score: 1000,
+    };
+   })
+  );
+ },
+};
+editor.completers = [staticWordCompleter];
+
+var doLiveAutocomplete = function (e) {
+ var editor = e.editor;
+ if (e.command.name === "insertstring") {
+  if (/[\w.]/.test(e.args)) {
+   editor.execCommand("startAutocomplete");
+  }
+ }
+};
+
+editor.commands.on("afterExec", doLiveAutocomplete);
+
 // Initial Program
-editor.getSession().setValue("// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1='TBN';\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Cmd(2000);\n");
+editor.getSession().setValue('// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1="TBN";\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Shell("echo %username%");\n');
 editor.on("change", function (e) {
  lexWorker.postMessage(editor.getValue());
 });
