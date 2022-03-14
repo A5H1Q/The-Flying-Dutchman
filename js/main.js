@@ -300,7 +300,7 @@ pause
   args: true,
   meta: " Runs .Bat Script",
  },
- {helper: 'Shell("");', value: "Shell();", args: true, meta: " Runs Shell Commands"},
+ {helper: 'Shell("echo %username%");', value: "Shell();", args: true, meta: " Runs Shell Commands"},
  {helper: 'Speak("Hello...");', value: "Speak();", args: true, meta: " Text to Speech"},
  {helper: 'Play("http://...");', value: "Play();", args: true, meta: " Play a Remote (mp3) Audio File (URL)"},
  {helper: 'Mic("");', value: "Mic();", args: true, meta: " Records audio for 'x' ms"},
@@ -324,6 +324,7 @@ pause
  {helper: "Health();", value: "Health();", args: false, meta: " Reports back working conditions"},
  {helper: 'Log("");', value: "Log();", args: true, meta: " Logs every Activity"},
  {helper: "Delay(5000);", value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
+ {helper: "Shutdown(3500);", value: "Shutdown();", args: true, meta: " Shutsdown the system after 'x' ms"},
  {helper: 'Clone("");', value: "Clone();", args: true, meta: " Initiate Clone Operations"},
  {helper: "NClone();", value: "NClone();", args: false, meta: " Stops Cloning op"},
 ];

@@ -40,6 +40,7 @@ Unzip(x)         Y      Unzips file
 Health(x)        Y      Reports back working conditions
 Log(x)           Y      Logs every Activity
 Delay(x)         N      Pause Execution temporarily for 'x' ms
+Shutdown(x)      N       Shutsdown the system after 'x' ms"
 Clone()          Y      Initiate Clone Operations
 Noclone()        Y      Stops Cloning op
 
@@ -482,6 +483,18 @@ onmessage = function (event) {
      arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Delay(<grn>milliseconds</grn>)<br><br>Compiler failed with exit code 1F84";
     } else {
      txt += "<br>- Adds temporarily delay";
+    }
+   }
+  },
+
+  Shutdown: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Shutdown(<grn>milliseconds</grn>)<br><br>Compiler failed with exit code 1F84";
+    } else {
+     txt += "<br>-  Shutsdown the system after 'x' ms";
     }
    }
   },
