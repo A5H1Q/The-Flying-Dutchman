@@ -32,7 +32,7 @@ Web(x)           Y      Navigates to 'x' url
 Type(x)          Y      Types custom text
 Screenshot(x)    Y      Takes a Screenshot
 Camera(x)        Y      Captures a Photo
-Disk(x)          Y      Retrieves Disk Info
+Details(x)          Y      Retrieves Disk Info
 Tree(x)          Y      Retrieves Disk Info
 Send(x)          Y      Sends a File
 Zip(x)           Y      Zip a folder
@@ -252,7 +252,7 @@ onmessage = function (event) {
      arr[1] = "Target Cannot be Empty";
      arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     if (arr[4] != 2) {
+     if (arr[4] < 2) {
       arr[3] = x;
       arr[4] = 1;
      }
@@ -267,7 +267,7 @@ onmessage = function (event) {
      arr[1] = "Class Cannot be Empty";
      arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Class(<grn>class_name</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     if (arr[4] != 3) {
+     if (arr[4] < 3) {
       arr[3] = x;
       arr[4] = 2;
      }
@@ -390,7 +390,7 @@ onmessage = function (event) {
    }
   },
 
-  Disk: (x) => {
+  Details: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
