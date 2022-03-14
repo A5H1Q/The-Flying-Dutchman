@@ -268,7 +268,7 @@ editor.setOptions({
  enableBasicAutocompletion: true,
  enableLiveAutocompletion: true,
 });
-
+var fst = {};
 var wordList = [
  {value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
  {value: "Escape();", args: true, meta: " Destroy Evidence and Escape"},
@@ -313,34 +313,30 @@ var staticWordCompleter = {
  getCompletions: function (editor, session, pos, prefix, callback) {
   let line = session.getLine(pos.row);
   let lineStart = line.slice(0, pos.column - prefix.length);
-  var myList = /PC\.\s*$/.test(lineStart) ? wordList : [];
-  if (prefix.length == 0) {
+  if (/PC\.\s*$/.test(lineStart)) {
+   if (prefix.length == 0) {
+    fst = pos;
+   }
+
    callback(
     null,
-    myList.map((item) => {
+    wordList.map((item) => {
      return {
       value: item.value,
       meta: item.meta,
       score: 1000,
       completer: {
        insertMatch: function (editor, data) {
+        if (prefix.length != 0) {
+         editor.session.remove({start: fst, end: {row: pos.row, column: fst.column + prefix.length}});
+        }
         editor.session.insert(editor.getCursorPosition(), data.value);
         if (item.args) {
-         editor.gotoLine(pos.row + 1, pos.column + data.value.length - 2);
+         console.log(item.args);
+         editor.gotoLine(pos.row + 1, fst.column + data.value.length - 2);
         }
        },
       },
-     };
-    })
-   );
-  } else {
-   callback(
-    null,
-    myList.map((item) => {
-     return {
-      value: item.value,
-      meta: item.meta,
-      score: 1000,
      };
     })
    );
