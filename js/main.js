@@ -49,8 +49,8 @@ const istereo = (x) => {
 // Manage Connections
 var rData;
 var conToast = undefined;
-// General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds]
-var ctrlFlags = [false, true, true, true, 5000];
+// General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target]
+var ctrlFlags = [false, true, true, true, 5000, ""];
 // var readURL, writeURL, lCodes;
 // readURL = writeURL = lCodes = "";
 var webWorker = new Worker("./js/webworkers/request.js");
@@ -400,12 +400,54 @@ lexWorker.onmessage = function (event) {
  if (!event.data[0]) {
   document.getElementById("run").setAttribute("class", "menubar-item");
   document.getElementById("device").textContent = "Run on '" + event.data[3] + "'";
+  ctrlFlags[5] = event.data[3];
  } else {
   document.getElementById("run").setAttribute("class", "menubar-item nohover");
  }
 };
 
-const deploy = () => {};
+const deploy = () => {
+ if (!ctrlFlags[0]) {
+  let idToast = toast.publish({
+   type: "danger",
+   description: " Not connected to Botnet.",
+   timeout: 0,
+   actions: [
+    {
+     title: " CONNECT",
+     onClick: function () {
+      toast.remove(idToast);
+      connect();
+     },
+    },
+   ],
+  });
+ } else {
+  conToast = toast.publish({
+   type: "tower",
+   hideClose: true,
+   description: " Sending Instructions to '" + ctrlFlags[5] + "'",
+   timeout: 10000,
+  });
+  console.log("sending..");
+  // fetch(writeURL)
+  //  .then(function (response) {
+  //   if (response.status !== 200) {
+  //    postMessage([true, 0, event.data[1]]);
+  //    console.log("Status code error: " + response);
+  //   } else {
+  //    response.json().then(function (data) {
+  //     console.log(data);
+  //     postMessage([false, data, event.data[1]]);
+  //    });
+  //   }
+  //  })
+  //  .catch(function (err) {
+  //   postMessage([true, 0, event.data[1]]);
+  //   console.log("Fetch Error : ", err);
+  //  });
+ }
+};
 // [Inspector]
 const formatData = (x) => {
  ctrlFlags[3] = x;
