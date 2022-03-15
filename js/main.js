@@ -49,8 +49,8 @@ const istereo = (x) => {
 // Manage Connections
 var rData;
 var conToast = undefined;
-// General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target]
-var ctrlFlags = [false, true, true, true, 5000, ""];
+// General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target,6:mode (1: Specific PC |2: Class |3: All Systems)]
+var ctrlFlags = [false, true, true, true, 5000, "", 1];
 // var readURL, writeURL, lCodes;
 // readURL = writeURL = lCodes = "";
 var webWorker = new Worker("./js/webworkers/request.js");
@@ -394,6 +394,7 @@ lexWorker.onmessage = function (event) {
  //event.data[1]    -  Main Info (eval-output)
  //event.data[2]    -  Additional Info (markups)
  //event.data[3]    -  Target Name (If exist)
+ //event.data[4]    -  mode //1: Specific PC |2: Class |3: All Systems
 
  document.getElementById("vim").textContent = `>> run -i ${fileName}\n\n${event.data[1]}`;
  document.getElementById("vim").innerHTML += `<br><br>${event.data[2]}<br><br>>>`;
@@ -401,6 +402,7 @@ lexWorker.onmessage = function (event) {
   document.getElementById("run").setAttribute("class", "menubar-item");
   document.getElementById("device").textContent = "Run on '" + event.data[3] + "'";
   ctrlFlags[5] = event.data[3];
+  ctrlFlags[6] = event.data[4];
  } else {
   document.getElementById("run").setAttribute("class", "menubar-item nohover");
  }
@@ -437,7 +439,7 @@ const deploy = () => {
    },
    body: JSON.stringify({
     key: lCodes,
-    mode: 0, //0: Specific PC |1: Class of PC |2: All PC
+    mode: ctrlFlags[6], //Mode=> 0: Specific PC |1: Class of PC |2: All PC
     name: ctrlFlags[5],
     dir: 0, //0: Normal(S->C) | 1: Response(C->S)
     code: editor.getValue(),
