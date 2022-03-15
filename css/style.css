@@ -348,7 +348,7 @@ red {
 }
 .line {
  border-bottom: 1px dashed #777777;
- height: 35px;
+ /* height: 35px; */
  line-height: 40px;
 }
 #statusbar {

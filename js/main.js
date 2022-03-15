@@ -430,22 +430,69 @@ const deploy = () => {
    timeout: 10000,
   });
   console.log("sending..");
-  // fetch(writeURL)
-  //  .then(function (response) {
-  //   if (response.status !== 200) {
-  //    postMessage([true, 0, event.data[1]]);
-  //    console.log("Status code error: " + response);
-  //   } else {
-  //    response.json().then(function (data) {
-  //     console.log(data);
-  //     postMessage([false, data, event.data[1]]);
-  //    });
-  //   }
-  //  })
-  //  .catch(function (err) {
-  //   postMessage([true, 0, event.data[1]]);
-  //   console.log("Fetch Error : ", err);
-  //  });
+  fetch(writeURL, {
+   method: "POST",
+   headers: {
+    "Content-Type": "text/plain;charset=utf-8",
+   },
+   body: JSON.stringify({
+    key: lCodes,
+    mode: 0, //0: Specific PC |1: Class of PC |2: All PC
+    name: ctrlFlags[5],
+    dir: 0, //0: Normal(S->C) | 1: Response(C->S)
+    code: editor.getValue(),
+   }),
+  })
+   .then((response) => {
+    response.json().then(function (res) {
+     console.log(res);
+     if (res.done == "ok") {
+      toast.publish({
+       type: "success",
+       hideClose: true,
+       description: " Instructions uplinked succesfully ",
+       timeout: 3000,
+      });
+     } else {
+      let idToast = toast.publish({
+       type: "danger",
+       description: " Server responded with an error",
+       timeout: 0,
+       actions: [
+        {
+         title: " OK",
+         onClick: function () {
+          toast.remove(idToast);
+         },
+        },
+       ],
+      });
+     }
+    });
+   })
+   .then((data) => {
+    // When the fetch is successful
+    toast.remove(conToast);
+   })
+   .catch((error) => {
+    // When there is an error
+    toast.remove(conToast);
+    let idToast = toast.publish({
+     type: "danger",
+     description: " An error occured while sending..",
+     timeout: 0,
+     actions: [
+      {
+       title: " RETRY",
+       onClick: function () {
+        toast.remove(idToast);
+        deploy();
+       },
+      },
+     ],
+    });
+    console.log(error);
+   });
  }
 };
 // [Inspector]
