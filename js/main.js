@@ -57,11 +57,11 @@ var webWorker = new Worker("./js/webworkers/request.js");
 
 const promptBox = (x) => {
  if (x == 0) {
-  readURL = prompt("Enter URL for Read Operation: ");
+  readURL = prompt("Enter URL for Read Operation: ", readURL);
  } else if (x == 1) {
-  writeURL = prompt("Enter URL for Write Operation: ");
- } else if (x == 1) {
-  lCodes = prompt("Enter Launch Codes: ");
+  writeURL = prompt("Enter URL for Write Operation: ", writeURL);
+ } else if (x == 2) {
+  lCodes = prompt("Enter Launch Codes: ", lCodes);
  } else {
   ctrlFlags[4] = parseInt(prompt("Enter Delay in milliseconds", "5000"), 10);
  }
@@ -397,8 +397,15 @@ lexWorker.onmessage = function (event) {
 
  document.getElementById("vim").textContent = `>> run -i ${fileName}\n\n${event.data[1]}`;
  document.getElementById("vim").innerHTML += `<br><br>${event.data[2]}<br><br>>>`;
+ if (!event.data[0]) {
+  document.getElementById("run").setAttribute("class", "menubar-item");
+  document.getElementById("device").textContent = "Run on '" + event.data[3] + "'";
+ } else {
+  document.getElementById("run").setAttribute("class", "menubar-item nohover");
+ }
 };
 
+const deploy = () => {};
 // [Inspector]
 const formatData = (x) => {
  ctrlFlags[3] = x;
