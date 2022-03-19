@@ -210,7 +210,7 @@ const parseData = (x, y) => {
   if (x.values[0][0] == "DUTCHMAN") {
    if (y) {
     toast.publish({
-     type: "info",
+     type: "danger",
      hideClose: true,
      description: " Successfully Connected to RAT Network",
      timeout: 3000,
@@ -255,6 +255,7 @@ webWorker.onmessage = function (event) {
 };
 
 // [Editor]
+var hotrelod = true;
 var fileName = "Untitled.fdm";
 var lexWorker = new Worker("./js/webworkers/compiler.js");
 var editor = ace.edit("editor");
@@ -378,9 +379,9 @@ var doLiveAutocomplete = function (e) {
 editor.commands.on("afterExec", doLiveAutocomplete);
 
 // Initial Program
-editor.getSession().setValue('// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1="TBN";\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Shell("echo %username%");\n');
+editor.getSession().setValue('// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1="A01";\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Shell("echo %username%");\n');
 editor.on("change", function (e) {
- lexWorker.postMessage(editor.getValue());
+ hotrelod && lexWorker.postMessage(editor.getValue());
 });
 editor.on("focus", function () {
  winFocus(2);
@@ -500,52 +501,6 @@ const deploy = () => {
  }
 };
 
-function lawyer(l) {
- document.getElementById("editor").style.display = "none";
- document.getElementById("readonly").style.display = "block";
- document.getElementById("run").setAttribute("class", "menubar-item nohover");
- document.getElementById("ide").setAttribute("class", "pretty-split-pane-component-inner logo read");
-
- if (l == 0) {
-  document.getElementById("fne").textContent = "Readme.md";
-  document.getElementById("readonly").innerHTML = `===================================
-       DOCUMENTATION
-===================================
-
-Version : 4.0.1
-Last Updated : 19 Februvary 2021
-
-
- INTRODUCTION
------------------------------------
-
-        This is a browser based implementation of an integrated IDE and a custom programming language designed to control Remote Access Trojans (RATs) in a distributed RAT Network. The interface is designed to simulate a basic command and control facility for the communication of RATs in the Network. All RATs on the network are pre-programmed to follow the syntax and definitions of this custom language. A few examples are provided in the Wiki section. Permission for use is granted only for Educational purposes, and are strictly subjected to the conditions specified in the license agreement.
-
-
-
- LANGUAGE
----------------------------------
-`;
- } else {
-  document.getElementById("fne").textContent = "License.txt";
-  document.getElementById("readonly").innerHTML = `===================================
-       LICENSE / TERMS OF USE
-===================================
-
-Author: Ashik saleem
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), for use in a manner of educational purposes only, and are strictly subjected to the following conditions:-
-
-1. USAGE FOR HACKING OR ANY ILLEGAL MEANS IS STRICTLY PROHIBITED. IN SUCH AN EVENT THE ORIGINAL OWNER IS NOT, IN ANY MANNER OF FORM RESPONSIBLE FOR THE DAMAGES CAUSED..
-2. USAGE OF THIS SOFTWARE AS A COMMAND AND CONTROL FACILITY IS STRICTLY FORBIDDEN.
-3. ANY ILLEGAL ACTIVITY INVOLVING THIS SOFTWARE MAY AUTOMATICALLY REVOKE THIS AGREEMENT.
-4. THIS COPYRIGHT / PERMISSION NOTICE SHALL BE INCLUDED IN ALL COPIES AND IS APPLICABLE TO ALL PORTIONS OF THE SOFTWARE..
-5. RESPECT PRIVACY, DONT BE A D*CK.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, AND IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-`;
- }
-}
 // [Inspector]
 const formatData = (x) => {
  ctrlFlags[3] = x;

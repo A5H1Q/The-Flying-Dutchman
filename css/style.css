@@ -7,7 +7,6 @@ body {
  font-size: 12px;
  font: 12px "Open Sans", sans-serif !important;
 }
-
 .split-pane {
  position: relative;
  height: 100%;
@@ -211,10 +210,12 @@ body {
 .table-head {
  font-weight: bold;
 }
-table {
+#assets {
  min-width: 600px;
  user-select: none;
+ width: 100%;
 }
+
 tr {
  line-height: 25px;
 }
@@ -227,8 +228,14 @@ tr:hover {
 td {
  padding-left: 10px;
 }
+#assets.nobtn > tbody > tr > td > mark {
+ pointer-events: none;
+}
 audio {
  display: none;
+}
+.audi {
+ pointer-events: all !important;
 }
 .grey {
  color: #42555f !important;
@@ -274,6 +281,18 @@ mark {
  line-height: 25px !important;
  width: calc(100% - 10px);
  height: calc(100% - 48px);
+}
+#backdrop {
+ display: none;
+ cursor: wait;
+ z-index: 999;
+ width: 100%;
+ height: 100%;
+ background: transparent;
+ position: absolute;
+ box-sizing: border-box;
+ left: 0;
+ top: 0;
 }
 .ace-clouds {
  background-color: transparent !important;
@@ -496,6 +515,9 @@ red {
  background: #fff !important;
  opacity: 0.4;
  pointer-events: none !important;
+}
+.disabled {
+ pointer-events: none;
 }
 .tlock {
  float: right;
