@@ -68,13 +68,7 @@ onmessage = function (event) {
 
   Escape: () => {
    if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Escape(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     txt += "<br>- Destroy Evidence and Escape";
-    }
+    txt += "<br>- Destroy Evidence and Escape";
    }
   },
 

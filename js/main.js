@@ -137,7 +137,7 @@ const conError = () => {
  conToggle(0);
  let idToast = toast.publish({
   type: "danger",
-  description: " Connection Failed.\nPlease check your configuration and try again",
+  description: " Connection Failed.\nPlease check your url configurations.",
   timeout: 0,
   actions: [
    {
@@ -172,7 +172,7 @@ const conToggle = (x) => {
  } else {
   document.getElementById("conLabel").classList.add("nohover");
   document.getElementById("nocLabel").classList.add("nohover");
-  document.getElementById("cDot").setAttribute("class", "idot ylwDot");
+  document.getElementById("cDot").setAttribute("class", "idot ylwDot blinks");
   document.getElementById("inspector-toolbar").setAttribute("class", "windows-menubar nohover");
   document.getElementById("conStat").textContent = "Trying to Connect..";
   document.getElementById("statusbar").style.display = "none";
@@ -207,10 +207,10 @@ const initReq = () => {
 
 const parseData = (x, y) => {
  if (x.values) {
-  if (x.values[0][0] == "DUTCHMAN") {
+  if (x.values[0][0] == "4D1O5-AMIG0S") {
    if (y) {
     toast.publish({
-     type: "danger",
+     type: "done",
      hideClose: true,
      description: " Successfully Connected to RAT Network",
      timeout: 3000,
@@ -274,7 +274,7 @@ editor.setOptions({
 var fst = {};
 var wordList = [
  {helper: 'Excape("");', value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
- {helper: 'Escape("");', value: "Escape();", args: true, meta: " Destroy Evidence and Escape"},
+ {helper: "Escape();", value: "Escape();", args: false, meta: " Destroy All Evidences and Escape"},
  {helper: "Marco();", value: "Marco();", args: false, meta: " Returns Polo if Online"},
  {helper: "Close();", value: "Close();", args: false, meta: " End Execution"},
  {helper: 'Update("");', value: "Update();", args: true, meta: " Updates self"},

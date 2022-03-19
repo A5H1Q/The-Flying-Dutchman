@@ -2,7 +2,7 @@ const typer = (x) => {
  toast.publish({
   type: "robot",
   hideClose: true,
-  description: `Activating Autopilot..`,
+  description: `Initializing Autopilot...`,
   timeout: 1000,
  });
  hotrelod = false;
@@ -37,10 +37,10 @@ const shakeSpeare = (x, y) => {
  let tale;
  switch (x) {
   case 1:
-   tale = "// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nimport '/sys';\nvar pc1='TBN';\nPC.lock(pc1);\nsys.play(02);\nsys.sleep(2000);\nsys.unlock();\n";
+   tale = `// |================================================|\n// | Program-1\n// | Description: Delete RATs from All Systems.\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nPC.All(); // Selects All Systems.\nPC.Escape(); // Initiate Escape Sequence.\n\n`;
    break;
   case 2:
-   tale = "// |==============================================|\n// |  Program-2\n// |  Description: Delete RAT from a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,A01,ENDT  // Selects RAT Named 'A01'\nCMD,ESCAPE,ENDC // Perform Escape sequence\n// The key will Auto-hide As you type..\nKEY:123456789\n// To view Hidden key : Hit CTRL + A or Toggle X-Ray by Selecting key text with cursor\n";
+   tale = `// |================================================|\n// | Program-2\n// | Description: Deletes a Specific RAT\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nvar bot="A01"\nPC.Lock(bot); // Selects 'A01'.\nPC.Escape(); // Initiate Escape Sequence. \n\n`;
    break;
   case 3:
    tale = "// |==============================================|\n// |  Program-3\n// |  Description: Check RATs Availability on all systems\n// |________________________________________________|\n\nTAR,MARCO,ENDT  // RATs will return 'POLO' if its online\n";
@@ -141,13 +141,13 @@ const shakeSpeare = (x, y) => {
   s++;
   if (s === tale.length) {
    clearInterval(ink);
-   editor.navigateLineEnd();
    document.getElementById("ebar").setAttribute("class", "toolbar inbar");
    document.getElementById("assets").setAttribute("class", "");
    document.getElementById("backdrop").style.display = "none";
    document.getElementById("docs").setAttribute("class", "menubar-item");
    hotrelod = true;
    editor.getSession().setValue(editor.getValue() + " ");
+   editor.navigateLineEnd();
    const t1 = performance.now();
    let ms = t1 - y;
    ms /= 1000;
@@ -155,8 +155,8 @@ const shakeSpeare = (x, y) => {
    toast.publish({
     type: "robot",
     hideClose: true,
-    description: `Finished writing in  ${latency} sec`,
-    timeout: 3500,
+    description: `Program Completed in  ${latency} sec`,
+    timeout: 2000,
    });
   }
  }, 1);

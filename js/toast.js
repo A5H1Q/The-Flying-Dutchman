@@ -14,8 +14,8 @@ const NAME_ITEM = "el-toast",
   TOWER: {
    CLASSES: ["fa", "fa-signal"],
   },
-  LOCK: {
-   CLASSES: ["fa", "fa-lock"],
+  DONE: {
+   CLASSES: ["fa", "fa-check-circle"],
   },
   UNLOCK: {
    CLASSES: ["fa", "fa-unlock-alt"],
@@ -340,7 +340,7 @@ idToast = toast.publish({
  type: "info",
  hideClose: true,
  description: " By using this utility, you're agreeing to the Terms and conditions / license",
- timeout: 10000,
+ timeout: 7000,
  actions: [
   {
    title: " READ MORE",
