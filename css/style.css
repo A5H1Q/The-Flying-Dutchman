@@ -399,25 +399,31 @@ red {
  /* height: 35px; */
  line-height: 40px;
 }
-.line-1:nth-child(1):before,
-.line-2:nth-child(1):before {
- content: "Mode: ";
+.line:nth-child(1):before {
+ content: "ID: ";
  padding: 7px;
 }
-.line-1:nth-child(2):before {
- content: "Target: ";
+.line:nth-child(2):before {
+ content: "Level: ";
  padding: 7px;
 }
-.line-1:nth-child(3):before {
+.line:nth-child(4):before {
  content: "Reply: ";
  padding: 7px;
 }
-.line-2:nth-child(2):before {
+.line-1:nth-child(3):before {
+ content: "Target: ";
+ padding: 7px;
+}
+.line-2:nth-child(3):before {
  content: "Class: ";
  padding: 7px;
 }
-
-.line:nth-child(4) {
+.line-3:nth-child(3):before {
+ content: "Scope: ";
+ padding: 7px;
+}
+.line:nth-child(5) {
  background: #f2f2f2;
  padding: 10px;
  word-break: break-all;

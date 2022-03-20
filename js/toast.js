@@ -14,8 +14,8 @@ const NAME_ITEM = "el-toast",
   TOWER: {
    CLASSES: ["fa", "fa-signal"],
   },
-  DONE: {
-   CLASSES: ["fa", "fa-check-circle"],
+  USER: {
+   CLASSES: ["fa", "fa-map-marker-alt"],
   },
   UNLOCK: {
    CLASSES: ["fa", "fa-unlock-alt"],

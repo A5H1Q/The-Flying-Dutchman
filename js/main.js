@@ -49,6 +49,7 @@ const istereo = (x) => {
 // Manage Connections
 var rData;
 var opCode = "";
+var hash = "Al1ce";
 var conToast = undefined;
 // General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target,6:mode (1: Specific PC |2: Class |3: All Systems)]
 var ctrlFlags = [false, true, true, true, 5000, "", 1];
@@ -211,18 +212,34 @@ const parseData = (x, y) => {
   if (x.values[0][0] == "DUTCHMAN") {
    if (y) {
     toast.publish({
-     type: "done",
+     type: "success",
      hideClose: true,
      description: " Successfully Connected to RAT Network",
      timeout: 3000,
     });
     conToggle(1);
    }
+   if (hash != x.values[1][0] && x.values[4][0] == "1") {
+    hash = x.values[1][0];
+    let idToast = toast.publish({
+     type: "user",
+     description: x.values[5][0],
+     timeout: 0,
+     actions: [
+      {
+       title: " OK",
+       onClick: function () {
+        toast.remove(idToast);
+       },
+      },
+     ],
+    });
+   }
    if (ctrlFlags[3]) {
     // Formatted Mode
     document.getElementById("holmes").innerHTML = "";
     for (let i = 1; i < x.values.length; i++) {
-     document.getElementById("holmes").innerHTML += `<div class="line line-${x.values[1][0]}">${x.values[i][0]}</div>`;
+     document.getElementById("holmes").innerHTML += `<div class="line line-${x.values[2][0]}">${x.values[i][0]}</div>`;
     }
     document.getElementById("holmes").innerHTML += '<div class="line">&nbsp;</div>';
    }
@@ -452,6 +469,7 @@ const deploy = () => {
    },
    body: JSON.stringify({
     key: lCodes,
+    hash: (Math.random() + 1).toString(36).substring(7),
     mode: ctrlFlags[6], //Mode=> 0: Specific PC |1: Class of PC |2: All PC
     name: ctrlFlags[5],
     dir: 0, //0: Normal(S->C) | 1: Response(C->S)
@@ -461,7 +479,7 @@ const deploy = () => {
    .then((response) => {
     response.json().then(function (res) {
      console.log(res);
-     if (res.done == "ok") {
+     if (res.done == "yes") {
       toast.publish({
        type: "success",
        hideClose: true,
