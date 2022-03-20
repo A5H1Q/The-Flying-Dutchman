@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      <div id="docs" class="menubar-item">
+      <div class="menubar-item">
         <div onclick="lawyer(0)" class="menubar-item-label">Help</div>
         <div class="menubar-sub-items">
         </div>
@@ -156,9 +156,8 @@
                   <div class="menubar-item">
                     <div class="menubar-item-label">Load</div>
                     <div class="menubar-sub-items">
-                      <div id="relod"
-                        onclick="document.getElementById('spinner').style.display = 'block';document.getElementById('statusbar').textContent = 'Updating..';document.getElementById('holmes').innerHTML='';initReq();"
-                        class="menubar-item nohover"><span class="menubar-item-label">Reload</span>
+                      <div id="relod" onclick="reLoad();" class="menubar-item nohover"><span
+                          class="menubar-item-label">Reload</span>
                       </div>
                       <div id="setRelod" onclick="promptBox(3)" class="menubar-item"><span
                           class="menubar-item-label">Options</span>
@@ -246,22 +245,16 @@
                         </div>
                       </div>
                     </div>
-                    <div class="menubar-item"><span class="menubar-item-label">Device status</span>
+                    <div onclick="typer(3)" class="menubar-item"><span class="menubar-item-label">Device status</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(3)" class="menubar-item"><span class="menubar-item-label">All
-                            Devices</span>
-                        </div>
-                        <div onclick="typer(4)" class="menubar-item"><span class="menubar-item-label">Target
-                            device</span>
-                        </div>
                       </div>
                     </div>
                     <div class="menubar-item"><span class="menubar-item-label">Terminate execution</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(5)" class="menubar-item"><span class="menubar-item-label">All
+                        <div onclick="typer(4)" class="menubar-item"><span class="menubar-item-label">All
                             Devices</span>
                         </div>
-                        <div onclick="typer(6)" class="menubar-item"><span class="menubar-item-label">Target
+                        <div onclick="typer(5)" class="menubar-item"><span class="menubar-item-label">Target
                             device</span>
                         </div>
                       </div>
@@ -269,38 +262,41 @@
 
                     <div class="menubar-item"><span class="menubar-item-label">Update firmware</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(7)" class="menubar-item"><span class="menubar-item-label">All
+                        <div onclick="typer(6)" class="menubar-item"><span class="menubar-item-label">All
                             Devices</span>
                         </div>
-                        <div onclick="typer(8)" class="menubar-item"><span class="menubar-item-label">Target
+                        <div onclick="typer(7)" class="menubar-item"><span class="menubar-item-label">Target
                             device</span>
                         </div>
                       </div>
                     </div>
                     <div class="menubar-item"><span class="menubar-item-label">Hibernation</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(21)" class="menubar-item"><span class="menubar-item-label">All
+                        <div onclick="typer(8)" class="menubar-item"><span class="menubar-item-label">All
                             Devices</span>
                         </div>
-                        <div onclick="typer(22)" class="menubar-item"><span class="menubar-item-label">Target
+                        <div onclick="typer(9)" class="menubar-item"><span class="menubar-item-label">Target
                             device</span>
                         </div>
                       </div>
                     </div>
                     <div class="menubar-item"><span class="menubar-item-label">Replication</span>
                       <div class="menubar-sub-items">
-                        <div class="menubar-item"><span class="menubar-item-label">Clone to connected USB</span>
+                        <div onclick="typer(10)" class="menubar-item"><span class="menubar-item-label">Clone to
+                            connected
+                            USB</span>
                         </div>
-                        <div class="menubar-item"><span class="menubar-item-label">Stop cloning</span>
+                        <div onclick="typer(11)" class="menubar-item"><span class="menubar-item-label">Stop
+                            cloning</span>
                         </div>
                       </div>
                     </div>
                     <div class="menubar-item"><span class="menubar-item-label">Remote code execution</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(9)" class="menubar-item"><span class="menubar-item-label">VB
+                        <div onclick="typer(12)" class="menubar-item"><span class="menubar-item-label">VB
                             Script</span>
                         </div>
-                        <div onclick="typer(10)" class="menubar-item"><span class="menubar-item-label">Batch
+                        <div onclick="typer(13)" class="menubar-item"><span class="menubar-item-label">Batch
                             Script</span>
                         </div>
                       </div>
@@ -418,7 +414,7 @@
 
           <div class="split-pane-component" id="top-component-2">
 
-            <div id="ide" class="pretty-split-pane-component-inner logo">
+            <div id="ide" onclick="editor.focus()" class="pretty-split-pane-component-inner logo">
               <div tabIndex="2" id="editor">
               </div>
               <div id="readonly" spellcheck="false"></div>

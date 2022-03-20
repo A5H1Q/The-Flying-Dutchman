@@ -9,7 +9,7 @@ Command         Ack     Description
 Excape(x)        Y      Execute Batch script and Escape()
 Escape()         Y      Destroy Evidence and Escape
 Marco()          Y      Returns Polo if Online
-Close()          Y      End Execution
+Exit()           Y      End Execution
 Update(x)        Y      Updates self
 Hibernate(x)     Y      Hibernate till date
 Revive()         Y      End Hibernation  
@@ -42,57 +42,97 @@ Log(x)           Y      Logs every Activity
 Delay(x)         N      Pause Execution temporarily for 'x' ms
 Shutdown(x)      N       Shutsdown the system after 'x' ms"
 Clone()          Y      Initiate Clone Operations
-Noclone()        Y      Stops Cloning op
+NClone()        Y      Stops Cloning op
 
 And more...
 
 */
 onmessage = function (event) {
+ var code = ""; // Optimized code (string)
  var txt = "Code Summary:"; //Summary txt
- // General Array Format: [Error, Err desc(txt), Err desc(markup), target|class|all, target_spcified?(0|1|2|3)]
+ // General Array Format: [Error, Err desc(txt), Err desc(markup), target|class|all, target_spcified?(0|1|2|3),"empty optCode"]
  // arr[4]=> 0: Not specified, 1: Target, 2:Class, 3:All
- var arr = [false, "txt", "html", "target", 0];
+ var arr = [false, "txt", "html", "target", 0, ""];
 
  var PC = {
-  Excape: (x) => {
+  Lock: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Excape(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+     arr[1] = "Target Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     txt += "<br>- Execute Batch script and Escape()";
+     if (arr[4] !== 0) {
+      arr[0] = true;
+      arr[1] = "Mulitple Target selectors";
+      arr[2] = "<red>Program Error</red><br><br>Program contains more than one Target selectors<br><br>Compiler failed with exit code 1FXX";
+     } else {
+      arr[3] = x;
+      arr[4] = 1;
+     }
     }
    }
   },
 
+  Class: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Class Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Class(<grn>class_name</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     if (arr[4] !== 0) {
+      arr[0] = true;
+      arr[1] = "Mulitple Target selectors";
+      arr[2] = "<red>Program Error</red><br><br>Program contains more than one Target selectors<br><br>Compiler failed with exit code 1FXX";
+     } else {
+      arr[3] = x;
+      arr[4] = 2;
+     }
+    }
+   }
+  },
+
+  All: () => {
+   if (!arr[0]) {
+    if (arr[4] !== 0) {
+     arr[0] = true;
+     arr[1] = "Mulitple Target selectors";
+     arr[2] = "<red>Program Error</red><br><br>Program contains more than one Target selectors<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     arr[3] = "All Systems";
+     arr[4] = 3;
+    }
+   }
+  },
   Escape: () => {
    if (!arr[0]) {
     txt += "<br>- Destroy Evidence and Escape";
+    code += "Escape();\n";
    }
   },
 
   Marco: () => {
    if (!arr[0]) {
-    if (x == undefined) {
+    if (arr[4] == 0) {
      arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Marco(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
+     arr[1] = "Marco Requires a Target";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else if (arr[4] == 1) {
      txt += "<br>- Returns Polo if Online";
+     code += "Marco();\n";
+    } else {
+     arr[0] = true;
+     arr[1] = "Marco is not available for Multiple systems";
+     arr[2] = "<red>Program Error</red><br><br>Macro cannot be used for Mulitple targets<br><br>Compiler failed with exit code 1FXX";
     }
    }
   },
 
-  Close: () => {
+  Exit: () => {
    if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Close(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     txt += "<br>- End Execution";
-    }
+    txt += "<br>- End RAT Process";
+    code += "Exit();\n";
    }
   },
 
@@ -100,10 +140,11 @@ onmessage = function (event) {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Update(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+     arr[1] = "Requires Firmware file URL";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Update(<grn>firmware_url</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
-     txt += "<br>- Updates self";
+     txt += "<br>- Updates firmware";
+     code += `Update("${x}");\n`;
     }
    }
   },
@@ -112,10 +153,61 @@ onmessage = function (event) {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Hibernate(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+     arr[1] = "Date Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Hibernate(<grn>till_date</grn>)<br><br>Compiler failed with exit code 1FXX";
     } else {
      txt += "<br>- Hibernate till date";
+     code += `Hibernate("${x}");\n`;
+    }
+   }
+  },
+  Clone: (x, y) => {
+   if (!arr[0]) {
+    if (arr[4] == 0) {
+     arr[0] = true;
+     arr[1] = "Cloning Requires a Target";
+     arr[2] = "<red>Program Error</red><br><br>Expecting A Target selector, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else if (arr[4] == 1) {
+     if (x == undefined || y == undefined) {
+      arr[0] = true;
+      arr[1] = "Arguments Cannot be Empty";
+      arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Clone(<grn>Alias_name</grn>,(<grn>Icon_url</grn>)<br><br>Compiler failed with exit code 1FXX";
+     } else {
+      txt += "<br>- Initiate Clone Operations";
+      code += `Clone("${x}","${y}");\n`;
+     }
+    } else {
+     arr[0] = true;
+     arr[1] = "Cloning is not available for Multiple systems";
+     arr[2] = "<red>Program Error</red><br><br>Cloning cannot be used for Mulitple targets<br><br>Compiler failed with exit code 1FXX";
+    }
+   }
+  },
+
+  NClone: () => {
+   if (!arr[0]) {
+    if (arr[4] == 0) {
+     arr[0] = true;
+     arr[1] = "NClone() Requires a Target";
+     arr[2] = "<red>Program Error</red><br><br>Expecting A Target selector, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else if (arr[4] == 1) {
+     txt += "<br>- Terminates Cloning operations";
+     code += "NClone();";
+    } else {
+     arr[0] = true;
+     arr[1] = "NClone() is not available for Multiple systems";
+     arr[2] = "<red>Program Error</red><br><br>NClone() cannot be used for Mulitple targets<br><br>Compiler failed with exit code 1FXX";
+    }
+   }
+  },
+  Excape: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Excape(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Execute Batch script and Escape()";
     }
    }
   },
@@ -237,43 +329,6 @@ onmessage = function (event) {
     } else {
      txt += "<br>- Records audio for 'x' ms";
     }
-   }
-  },
-
-  Lock: (x) => {
-   if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Target Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     if (arr[4] < 2) {
-      arr[3] = x;
-      arr[4] = 1;
-     }
-    }
-   }
-  },
-
-  Class: (x) => {
-   if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Class Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Class(<grn>class_name</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     if (arr[4] < 3) {
-      arr[3] = x;
-      arr[4] = 2;
-     }
-    }
-   }
-  },
-
-  All: () => {
-   if (!arr[0]) {
-    arr[3] = "All Systems";
-    arr[4] = 3;
    }
   },
 
@@ -492,30 +547,6 @@ onmessage = function (event) {
     }
    }
   },
-
-  Clone: () => {
-   if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Clone(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     txt += "<br>- Initiate Clone Operations";
-    }
-   }
-  },
-
-  Noclone: () => {
-   if (!arr[0]) {
-    if (x == undefined) {
-     arr[0] = true;
-     arr[1] = "Delay Cannot be Empty";
-     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Noclone(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
-    } else {
-     txt += "<br>- Stops Cloning op";
-    }
-   }
-  },
  };
 
  try {
@@ -527,7 +558,7 @@ onmessage = function (event) {
  }
 
  if (!arr[0] && !arr[4]) {
-  arr = [true, "Target Not specified", "<red>Program Error</red><br><br>Syntax: PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1F43", "target", false];
+  arr = [true, "Target Not specified", "<red>Program Error</red><br><br>Syntax: PC.Lock(<grn>target_name</grn>)<br><br>Compiler failed with exit code 1F43", "", 0, ""];
  }
- arr[0] ? postMessage(arr) : txt == "Code Summary:" ? postMessage([false, "Ready to Run on: '" + arr[3] + "'", "<grn>Program Compiled succesfully..</grn><br><br>- No Actions to perform.", arr[3], arr[4]]) : postMessage([false, "Ready to Run on: '" + arr[3] + "'", "<grn>Program Compiled succesfully..</grn><br><br>" + txt, arr[3], arr[4]]);
+ arr[0] ? postMessage(arr) : txt == "Code Summary:" ? postMessage([false, "Ready to Run on: '" + arr[3] + "'", "<grn>Program Compiled succesfully..</grn><br><br>- No Actions to perform.", arr[3], arr[4], code]) : postMessage([false, "Ready to Run on: '" + arr[3] + "'", "<grn>Program Compiled succesfully..</grn><br><br>" + txt, arr[3], arr[4], code]);
 };

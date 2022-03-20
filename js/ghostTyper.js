@@ -9,7 +9,6 @@ const typer = (x) => {
  document.getElementById("backdrop").style.display = "block";
  document.getElementById("ebar").setAttribute("class", "toolbar inbar nohover");
  document.getElementById("assets").setAttribute("class", "nobtn");
- document.getElementById("docs").setAttribute("class", "menubar-item disabled");
  const t0 = performance.now();
  if (document.getElementById("fne").textContent == "Readme.md" || document.getElementById("fne").textContent == "License.txt") {
   document.getElementById("readonly").style.display = "none";
@@ -40,34 +39,34 @@ const shakeSpeare = (x, y) => {
    tale = `// |================================================|\n// | Program-1\n// | Description: Delete RATs from All Systems.\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nPC.All(); // Selects All Systems.\nPC.Escape(); // Initiate Escape Sequence.\n\n`;
    break;
   case 2:
-   tale = `// |================================================|\n// | Program-2\n// | Description: Deletes a Specific RAT\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nvar bot="A01"\nPC.Lock(bot); // Selects 'A01'.\nPC.Escape(); // Initiate Escape Sequence. \n\n`;
+   tale = `// |================================================|\n// | Program-2\n// | Description: Deletes a Specific RAT\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'.\nPC.Escape(); // Initiate Escape Sequence. \n\n`;
    break;
   case 3:
-   tale = "// |==============================================|\n// |  Program-3\n// |  Description: Check RATs Availability on all systems\n// |________________________________________________|\n\nTAR,MARCO,ENDT  // RATs will return 'POLO' if its online\n";
+   tale = `// |================================================|\n// | Program-3\n// | Description: Checks if a RAT is Online\n// | Response: POLO!\n// |________________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'.\nPC.Marco(); // Returns Polo if Online\n\n`;
    break;
   case 4:
-   tale = "// |==============================================|\n// |  Program-4\n// |  Description: Check if a RAT is online.\n// |________________________________________________|\n\nTAR,A01,ENDT  // Selects RAT Named 'A01'\nCMD,MARCO,ENDC // 'A01' will return 'POLO' if its online\n";
+   tale = `// |===================================================|\n// | Program-4\n// | Description: Temporarily end Botnet execution.\n// | Warning: This makes All systems go Offline.\n// |___________________________________________________|\n\nPC.All(); // Selects All Systems.\nPC.Exit(); // End the process.\n\n`;
    break;
   case 5:
-   tale = "// |==============================================|\n// |  Program-5\n// |  Description: Temporarily end All RAT's Execution.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// | Program-5\n// | Description: Temporarily end a specific RAT Process\n// | Warning: This makes the RAT go Offline.\n// |______________________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'.\nPC.Exit(); // End the process\n\n`;
    break;
   case 6:
-   tale = "// |==============================================|\n// |  Program-6\n// |  Description: Temporarily end a specific RAT's Execution.\n// |________________________________________________|\n\nTAR,A01,ENDT  // Selects RAT Named 'A01'\nCMD,EXIT,ENDC // Terminate A01's execution\n";
+   tale = `// |==============================================|\n// | Program-6\n// | Description: Update All RAT's firmware.\n// | Warning: This Action is Irreversible!\n// |______________________________________________|\n\nPC.All(); // Selects All systems.\nPC.Update("https://www..."); // URL to the firmware file\n \n`;
    break;
   case 7:
-   tale = "// |==============================================|\n// |  Program-7\n// |  Description: Update All RAT's software.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,UPDATE,ENDT  // Target Section\n// URL to the firmware file\nFILE:https://www.example.com/filename\n// The key will Auto-hide As you type..\nKEY:123456789\n// To view Hidden key : Hit CTRL + A or Toggle X-Ray by Selecting key text with cursor\n";
+   tale = `// |================================================|\n// | Program-7\n// | Description: Update a Specific RAT's firmware.\n// | Warning: This Action is Irreversible!\n// |________________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'.\nPC.Update("https://www..."); // URL to the firmware file\n\n`;
    break;
   case 8:
-   tale = "// |==============================================|\n// |  Program-8\n// |  Description: Update software of a specific RAT.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,A01,ENDT  // Selects RAT Named 'A01'\nCMD,UPDATE,ENDC // Perform Updation sequence on 'A01'\n// URL to the firmware file\nFILE:https://www.example.com/filename\n// The key will Auto-hide As you type..\nKEY:123456789\n// To view Hidden key : Hit CTRL + A or Toggle X-Ray by Selecting key text with cursor\n";
+   tale = `// |======================================================|\n// |  Program-8\n// |  Description: Enter hibernation mode for All Systems.\n// |  Note: However each RAT Will issue a single-\n// |  heartbeat signal on first startup of the day.\n// |______________________________________________________|\n\nPC.All(); // Selects All Systems.\nPC.Hibernate("15-01-2030"); // In DD-MM-YY Format.\n\n`;
    break;
   case 9:
-   tale = "// |==============================================|\n// |  Program-9\n// |  Description: Execute VB Script on a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-9\n// |  Description: Enter hibernation for a specific RAT.\n// |  Note: However the RAT Will issue a single-\n// |  heartbeat signal on first startup of the day.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Hibernate("15-01-2030"); // In DD-MM-YY Format.\n\n`;
    break;
   case 10:
-   tale = "// |==============================================|\n// |  Program-10\n// |  Description: Execute a Batch Script on a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-10\n// |  Description: Start Cloning to any connected USB.\n// |  Warning: May arise suspicion.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Clone("Name","https://www..."); // Format: Alias Name, Icon URL\n\n`;
    break;
   case 11:
-   tale = "// |==============================================|\n// |  Program-11\n// |  Description: Speak a string on a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-11\n// |  Description: Terminates Cloning Operations.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.NClone(); // Halt Cloning\n\n`;
    break;
   case 12:
    tale = "// |==============================================|\n// |  Program-12\n// |  Description: Play an mp3 audio on a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
@@ -144,10 +143,9 @@ const shakeSpeare = (x, y) => {
    document.getElementById("ebar").setAttribute("class", "toolbar inbar");
    document.getElementById("assets").setAttribute("class", "");
    document.getElementById("backdrop").style.display = "none";
-   document.getElementById("docs").setAttribute("class", "menubar-item");
    hotrelod = true;
    editor.getSession().setValue(editor.getValue() + " ");
-   editor.navigateLineEnd();
+   //    editor.navigateLineEnd();
    const t1 = performance.now();
    let ms = t1 - y;
    ms /= 1000;
@@ -155,7 +153,7 @@ const shakeSpeare = (x, y) => {
    toast.publish({
     type: "robot",
     hideClose: true,
-    description: `Program Completed in  ${latency} sec`,
+    description: `Finished writing in  ${latency} sec`,
     timeout: 2000,
    });
   }
@@ -163,14 +161,16 @@ const shakeSpeare = (x, y) => {
 };
 
 const lawyer = (l) => {
- document.getElementById("editor").style.display = "none";
- document.getElementById("readonly").style.display = "block";
- document.getElementById("run").setAttribute("class", "menubar-item nohover");
- document.getElementById("ide").setAttribute("class", "pretty-split-pane-component-inner logo read");
+ if (hotrelod) {
+  document.getElementById("editor").style.display = "none";
+  document.getElementById("readonly").style.display = "block";
+  document.getElementById("run").setAttribute("class", "menubar-item nohover");
+  document.getElementById("ide").setAttribute("class", "pretty-split-pane-component-inner logo read");
 
- if (l == 0) {
-  document.getElementById("fne").textContent = "Readme.md";
-  document.getElementById("readonly").innerHTML = `===================================
+  if (l == 0) {
+   document.getElementById("fne").textContent = "Readme.md";
+   document.getElementById("readonly").innerHTML = `
+===================================
        DOCUMENTATION
 ===================================
 
@@ -188,9 +188,10 @@ Last Updated : 19 Februvary 2021
  LANGUAGE
 ---------------------------------
 `;
- } else {
-  document.getElementById("fne").textContent = "License.txt";
-  document.getElementById("readonly").innerHTML = `===================================
+  } else {
+   document.getElementById("fne").textContent = "License.txt";
+   document.getElementById("readonly").innerHTML = `
+===================================
        LICENSE / TERMS OF USE
 ===================================
 
@@ -206,5 +207,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, AND IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 `;
+  }
  }
 };
