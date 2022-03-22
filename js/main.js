@@ -312,9 +312,8 @@ X=Msgbox("Message Here..",0+16,"TitleHere..")
  {
   helper: `Bat(\`
 @echo off
-echo.
-echo I'm Batchman..
-echo.
+REM This is a comment.
+echo Hola!
 pause
 \`);`,
   value: "Bat();",

