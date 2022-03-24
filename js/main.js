@@ -404,7 +404,7 @@ var doLiveAutocomplete = function (e) {
 editor.commands.on("afterExec", doLiveAutocomplete);
 
 // Initial Program
-editor.getSession().setValue('// |==============================================|\n// |  Program-1\n// |  Description: Delete RATs from all systems.\n// |  Requirements: Secret Key\n// |________________________________________________|\n\nvar pc1="A01";\nPC.Lock(pc1);\nPC.Delay(02);\nPC.Shell("echo %username%");\n');
+editor.getSession().setValue(`// |================================================|\n// | Program-1\n// | Description: Checks if a RAT is Online\n// | Response: POLO!\n// |________________________________________________|\n\nvar bot="A01";\nPC.Lock(bot); // Selects 'A01'.\nPC.Marco(); // Returns Polo if Online\n \n`);
 editor.on("change", function (e) {
  hotrelod && lexWorker.postMessage(editor.getValue());
 });

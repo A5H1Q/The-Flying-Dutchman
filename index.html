@@ -95,8 +95,8 @@
           </div>
         </div>
       </div>
-      <div class="menubar-item">
-        <div onclick="lawyer(0)" class="menubar-item-label">Help</div>
+      <div onclick="lawyer(0)" class="menubar-item">
+        <div class="menubar-item-label">Help</div>
         <div class="menubar-sub-items">
         </div>
       </div>
@@ -207,6 +207,9 @@
                 <div class="menubar-item"><span class="menubar-item-label">New</span>
                 </div>
                 <div class="menubar-item"><span class="menubar-item-label">Open...</span>
+                </div>
+                <div onclick="editor.getSession().setValue('');" class="menubar-item"><span
+                    class="menubar-item-label">Reset</span>
                 </div>
                 <div class="menubar-item"><span class="menubar-item-label">Download</span>
                 </div>
@@ -403,7 +406,8 @@
                     <div class="menubar-item"><span class="menubar-item-label">Execution
                         methods</span>
                       <div class="menubar-sub-items">
-                        <div onclick="typer(37)" class="menubar-item"><span class="menubar-item-label">Timed</span>
+                        <div onclick="typer(37)" class="menubar-item"><span class="menubar-item-label">Timed
+                            Execution</span>
                         </div>
                         <div onclick="typer(38)" class="menubar-item"><span class="menubar-item-label">Execute and
                             Escape</span>
