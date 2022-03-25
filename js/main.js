@@ -55,8 +55,8 @@ var hash = "Al1ce";
 var conToast = undefined;
 // General Format: [0:isConnected, 1:isAutomatic, 2:isCompilable, 3:isFormatted, 4:inDelay_in_milliseconds,5:target,6:mode (1: Specific PC |2: Class |3: All Systems)]
 var ctrlFlags = [false, true, true, true, 5000, "", 1];
-// var readURL, writeURL, lCodes;
-// readURL = writeURL = lCodes = "";
+var readURL, writeURL, lCodes; // Comment when testing
+readURL = writeURL = lCodes = "";
 var webWorker = new Worker("./js/webworkers/request.js");
 
 const promptBox = (x) => {

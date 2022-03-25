@@ -218,11 +218,11 @@
             <div class="menubar-item">
               <div class="menubar-item-label">Edit</div>
               <div class="menubar-sub-items">
-                <div onclick="document.execCommand('undo', true, null);" class="menubar-item"><span
-                    class="menubar-item-label">Undo<span class="combo">CTRL + Z</span></span>
+                <div onclick="editor.undo()" class="menubar-item"><span class="menubar-item-label">Undo<span
+                      class="combo">CTRL + Z</span></span>
                 </div>
-                <div onclick="document.execCommand('redo', true, null);" class="menubar-item"><span
-                    class="menubar-item-label">Redo<span class="combo">CTRL + Y</span></span>
+                <div onclick="editor.redo()" class="menubar-item"><span class="menubar-item-label">Redo<span
+                      class="combo">CTRL + Y</span></span>
                 </div>
               </div>
             </div>
