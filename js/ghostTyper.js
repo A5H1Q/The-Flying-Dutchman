@@ -181,12 +181,13 @@ const shakeSpeare = (x, y) => {
 };
 
 const lawyer = (l) => {
+ // hotrelod: Prevents clicking Docs/license while on Autopilot.
  if (hotrelod) {
   document.getElementById("editor").style.display = "none";
   document.getElementById("readonly").style.display = "block";
   document.getElementById("run").setAttribute("class", "menubar-item nohover");
   document.getElementById("ide").setAttribute("class", "pretty-split-pane-component-inner logo read");
-
+  document.getElementById("assets").setAttribute("class", "nobtn");
   if (l == 0) {
    document.getElementById("fne").textContent = "Readme.md";
    document.getElementById("readonly").innerHTML = `===================================

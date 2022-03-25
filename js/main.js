@@ -439,6 +439,16 @@ lexWorker.onmessage = function (event) {
  }
 };
 
+const blankPage = () => {
+ editor.getSession().setValue("");
+ document.getElementById("assets").setAttribute("class", "");
+ if (document.getElementById("fne").textContent == "Readme.md" || document.getElementById("fne").textContent == "License.txt") {
+  document.getElementById("readonly").style.display = "none";
+  document.getElementById("editor").style.display = "block";
+  document.getElementById("ide").setAttribute("class", "pretty-split-pane-component-inner logo");
+ }
+};
+
 const reLoad = () => {
  document.getElementById("spinner").style.display = "block";
  document.getElementById("statusbar").textContent = "Updating..";
